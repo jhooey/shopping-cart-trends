@@ -15,7 +15,6 @@ setup(
     keywords = "finances trending personal",
     url = "https://github.com/jhooey/grocery-cart-trends",
     packages = ['grocerytrends', 'tests'],
-    long_description = read('README.md'),
     classifiers =
         [
         "Development Status :: 1 - Planning",
