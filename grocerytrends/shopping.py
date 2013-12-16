@@ -16,9 +16,9 @@ class Receipt(object):
     
     def __init__(self, grocery_store):
         self.grocery_store = grocery_store
-        total = 0
-        tax = grocery_store.province.taxes
-        items = []
+        self.total = 0
+        self.tax = grocery_store.province.taxes
+        self.items = []
         
 class Item(object):
     
