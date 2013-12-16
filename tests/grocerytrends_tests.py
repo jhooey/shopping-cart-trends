@@ -1,11 +1,12 @@
 from nose.tools import *
-import grocerytrends
+from grocerytrends.shopping import Province
 
-def setup():
-    print("SETUP!")
+def test_province():
+    quebec = Province("Quebec", "QC", 13)
     
-def teardown():
-    print("TEAR DOWN!")
+    print (quebec.name)
+    print (quebec.abbreviation)
+    print (quebec.taxes)
     
-def test_basic():
-    print("I RAN!")
+    quebec.taxes += 45
+    print (quebec.taxes)
