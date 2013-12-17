@@ -44,7 +44,17 @@ class Receipt(object):
         self.items = []
         
         self.tax = store.province.taxes
+    
+    def __str__(self):
+        str_out = ' '.join([self.store.name, '    ', str(self.purchase_date), '\n' ])
+        for item in self.items:
+            str_out += ' '.join(['\n', str(item), '    ', 
+                            str(item.total_cost(self.tax))])
+        str_out += ' '.join(['\n\nTaxes:', str(self.tax), 
+                             '    Total =', str(self.total) ])
+        return str_out
         
+            
     def __add_to_total(self, item):
         self.total += item.total_cost(self.tax)
     
@@ -58,7 +68,7 @@ class Receipt(object):
         
     def add_item(self, item):
         self.items.append(item)
-        __add_to_total(item)
+        self.__add_to_total(item)
         
         
 class Item(object):
@@ -76,6 +86,6 @@ class Item(object):
        
     def total_cost(self,tax):
         if self.taxed:
-            return (self.quantity *self.price) * (1 + self.tax/100)
+            return (self.quantity *self.price) * (1 + tax/100)
         else:
             return (self.quantity *self.price)
