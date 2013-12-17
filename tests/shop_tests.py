@@ -1,10 +1,10 @@
 from nose.tools import *
-import grocerytrends.shop as shop
+import grocerytrends.receipts as receipts
 
 def shop_init_tests():
     print ("Testing the Province Class")
     
-    quebec = shop.Province("Quebec", "QC", 13) 
+    quebec = receipts.Province("Quebec", "QC", 13) 
     
     print ('Province Name: ' + quebec.name)
     print ('Province Abbreviation: ' + quebec.abbreviation)
@@ -15,33 +15,33 @@ def shop_init_tests():
     quebec.taxes -= 45
     print ('Province Taxes(-45): {}'.format(quebec.taxes))
     
-    print ("Testing the GroceryStore Class")
-    loblaws = shop.GroceryStore("Loblaws", quebec)
-    print ('Grocery Store Name: ' + loblaws.name)
-    print ('Grocery Store Province Name: ' + loblaws.province.name)
-    print ('Grocery Store Province Abbr: ' + loblaws.province.abbreviation)
-    print ('Grocery Store Province Taxes: {}'.format(loblaws.province.taxes))
+    print ("Testing the Store Class")
+    loblaws = receipts.Store("Loblaws", quebec)
+    print ('Store Name: ' + loblaws.name)
+    print ('Store Province Name: ' + loblaws.province.name)
+    print ('Store Province Abbr: ' + loblaws.province.abbreviation)
+    print ('Store Province Taxes: {}'.format(loblaws.province.taxes))
     
     
     print ("Testing the Receipt Class")
-    receipt = shop.Receipt(loblaws)
+    receipt = receipts.Receipt(loblaws)
     print ('Receipt : {}'.format(receipt.total))
     print ('Receipt Purchase Date : {}'.format(receipt.purchase_date))
     print ('Receipt Tax: {}'.format(receipt.tax))
     print ('Receipt Items: {}'.format(receipt.items))
     
     
-    print ('Receipt Grocery Store Name: ' + 
-           receipt.grocery_store.name)
-    print ('Receipt Grocery Store Province Name: ' + 
-           receipt.grocery_store.province.name)
-    print ('Receipt Grocery Store Province Abbr: ' + 
-           receipt.grocery_store.province.abbreviation)
-    print ('Receipt Grocery Store Province Taxes: '
-           '{}'.format(receipt.grocery_store.province.taxes))
+    print ('Receipt Store Name: ' + 
+           receipt.store.name)
+    print ('Receipt Store Province Name: ' + 
+           receipt.store.province.name)
+    print ('Receipt Store Province Abbr: ' + 
+           receipt.store.province.abbreviation)
+    print ('Receipt Store Province Taxes: '
+           '{}'.format(receipt.store.province.taxes))
     
-    print ("Modifying Receipt Grocery Store Province Taxes")
-    receipt.grocery_store.province.taxes += 88
+    print ("Modifying Receipt Store Province Taxes")
+    receipt.store.province.taxes += 88
     print (' '.join(["Printing Province Taxes: ", quebec.name, 
                      'taxes =', str(quebec.taxes)]
                     )
