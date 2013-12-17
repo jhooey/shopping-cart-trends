@@ -74,8 +74,7 @@ def receipts_method_tests():
     
     print(str(receipt))
     
-    bananas.quantity = 12
-    
+    receipt.remove_item_by_name(bananas.name)
     
     print(str(receipt))
     

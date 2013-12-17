@@ -76,6 +76,9 @@ class Receipt(object):
         """
         self.items.append(copy.deepcopy(item))
         
+    def remove_item_by_name(self, name):
+        name = name.lower()
+        self.items = [item for item in self.items if item.name.lower() != name]
         
 class Item(object):
     """A single item purchased at a Store"""
