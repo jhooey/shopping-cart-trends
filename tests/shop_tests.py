@@ -55,8 +55,15 @@ def receipt_init_tests():
     print ('Item Price : {}'.format(bananas.price))
     print ('Item Quantity: {}'.format(bananas.quantity))
     print ('Item Taxed? {}'.format(bananas.taxed))
+    
+    print (str(bananas))
 
 def receipts_method_tests():
     quebec = receipts.Province("Quebec", "QC", 13)
     loblaws = receipts.Store("Loblaws", quebec) 
     receipt = receipts.Receipt(loblaws)
+    
+    bananas = receipts.Item('Bananas', 0.79, 1.8)
+    pears = receipts.Item('Pears', 1.49, 4)
+    
+    
