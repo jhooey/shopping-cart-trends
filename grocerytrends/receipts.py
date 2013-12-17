@@ -17,7 +17,7 @@ class Province(object):
     def __init__(self, name, abbr, taxes):
         self.name = name
         self.abbreviation = abbr
-        self.taxes = taxes
+        self.taxes = float(taxes)
         
 
 class Store(object):
@@ -39,36 +39,28 @@ class Receipt(object):
     def __init__(self, store, purchase_date=datetime.date.today()):
         self.store = store
         self.purchase_date = purchase_date
-        
-        self.total = 0
         self.items = []
-        
         self.tax = store.province.taxes
     
     def __str__(self):
-        str_out = ' '.join([self.store.name, '    ', str(self.purchase_date), '\n' ])
+        str_out = 'Receipt: \n'
+        str_out += ' '.join([self.store.name, '    ', str(self.purchase_date), '\n' ])
         for item in self.items:
             str_out += ' '.join(['\n', str(item), '    ', 
-                            str(item.total_cost(self.tax))])
+                            str(round(item.total_cost(self.tax),2))])
         str_out += ' '.join(['\n\nTaxes:', str(self.tax), 
-                             '    Total =', str(self.total) ])
+                             '    Total =', str(round(self.total(),2))])
         return str_out
         
-            
-    def __add_to_total(self, item):
-        self.total += item.total_cost(self.tax)
     
-    def __remove_from_total(self, item):
-        self.total += item.total_cost(self.tax)
-    
-    def recalculate_total(self):
-        self.total = 0
+    def total(self):
+        total = 0
         for item in self.items:
-            self.total += item.total_cost(self.tax)
-        
+            total += item.total_cost(self.tax)
+        return total
+    
     def add_item(self, item):
         self.items.append(item)
-        self.__add_to_total(item)
         
         
 class Item(object):
@@ -76,8 +68,8 @@ class Item(object):
     
     def __init__(self, name, price, quantity=1, taxed=False):
         self.name = name
-        self.price = price
-        self.quantity = quantity
+        self.price = float(price)
+        self.quantity = float(quantity)
         self.taxed = taxed
     
     def __str__(self):
@@ -86,6 +78,6 @@ class Item(object):
        
     def total_cost(self,tax):
         if self.taxed:
-            return (self.quantity *self.price) * (1 + tax/100)
+            return (self.quantity * self.price) * (1 + tax/100)
         else:
             return (self.quantity *self.price)
