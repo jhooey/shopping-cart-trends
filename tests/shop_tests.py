@@ -1,5 +1,5 @@
 from nose.tools import *
-import grocerytrends.receipts as receipts
+import grocerytrends.receipt as receipts
 
 def receipt_init_tests():
     print ("Testing the Province Class")
