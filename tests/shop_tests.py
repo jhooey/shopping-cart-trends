@@ -25,7 +25,7 @@ def receipt_init_tests():
     
     print ("Testing the Receipt Class")
     receipt = receipts.Receipt(loblaws)
-    print ('Receipt : {}'.format(receipt.total))
+    print ('Receipt : {}'.format(receipt.total()))
     print ('Receipt Purchase Date : {}'.format(receipt.purchase_date))
     print ('Receipt Tax: {}'.format(receipt.tax))
     print ('Receipt Items: {}'.format(receipt.items))
@@ -73,3 +73,10 @@ def receipts_method_tests():
     receipt.add_item(napkins)
     
     print(str(receipt))
+    
+    bananas.quantity = 12
+    
+    
+    print(str(receipt))
+    
+    
