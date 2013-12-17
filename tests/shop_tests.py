@@ -26,6 +26,7 @@ def shop_init_tests():
     print ("Testing the Receipt Class")
     receipt = shop.Receipt(loblaws)
     print ('Receipt : {}'.format(receipt.total))
+    print ('Receipt Purchase Date : {}'.format(receipt.purchase_date))
     print ('Receipt Tax: {}'.format(receipt.tax))
     print ('Receipt Items: {}'.format(receipt.items))
     
@@ -45,3 +46,4 @@ def shop_init_tests():
                      'taxes =', str(quebec.taxes)]
                     )
            )
+    print ('Receipt Tax: {}'.format(receipt.tax))

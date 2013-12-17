@@ -1,3 +1,5 @@
+import datetime
+
 class Province(object):
     
     def __init__(self, name, abbr, taxes):
@@ -14,11 +16,14 @@ class GroceryStore(object):
         
 class Receipt(object):
     
-    def __init__(self, grocery_store):
+    def __init__(self, grocery_store, purchase_date=datetime.date.today()):
         self.grocery_store = grocery_store
+        self.purchase_date = purchase_date
+        
         self.total = 0
-        self.tax = grocery_store.province.taxes
         self.items = []
+        
+        self.tax = grocery_store.province.taxes
         
 class Item(object):
     
