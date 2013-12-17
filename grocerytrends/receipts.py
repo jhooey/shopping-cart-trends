@@ -9,7 +9,7 @@ can create item objects that can be attached to your receipt
 """
 
 import datetime
-
+import copy
 
 class Province(object):
     """Physical Location, used to separate different tax regions"""
@@ -43,24 +43,35 @@ class Receipt(object):
         self.tax = store.province.taxes
     
     def __str__(self):
+        """Creates a string that resembles a receipt form a store"""
         str_out = 'Receipt: \n'
-        str_out += ' '.join([self.store.name, '    ', str(self.purchase_date), '\n' ])
+        str_out += ' '.join([self.store.name, '    ', 
+                             str(self.purchase_date), '\n' ])
+        
         for item in self.items:
             str_out += ' '.join(['\n', str(item), '    ', 
                             str(round(item.total_cost(self.tax),2))])
+            
         str_out += ' '.join(['\n\nTaxes:', str(self.tax), 
                              '    Total =', str(round(self.total(),2))])
         return str_out
         
     
     def total(self):
+        """Takes the total_cost for each item and adds them to get a total"""
         total = 0
         for item in self.items:
             total += item.total_cost(self.tax)
         return total
     
     def add_item(self, item):
-        self.items.append(item)
+        """
+        Adds a COPY of the submitted item
+        
+        A copy is used because receipts are supposed to be snapshots in time
+        and then we can reuse the item for other receipts 
+        """
+        self.items.append(copy.deepcopy(item))
         
         
 class Item(object):
@@ -75,7 +86,7 @@ class Item(object):
     def __str__(self):
         return ' '.join([self.name, str(self.price) + '$',
                          'QTY:', str(self.quantity) ])
-       
+    
     def total_cost(self,tax):
         if self.taxed:
             return (self.quantity * self.price) * (1 + tax/100)
