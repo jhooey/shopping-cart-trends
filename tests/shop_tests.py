@@ -47,6 +47,8 @@ def receipt_init_tests():
                     )
            )
     print ('Receipt Tax: {}'.format(receipt.tax))
+    
+    print(str(receipt))
 
 
     bananas = receipts.Item('Bananas', 0.79, 1.8)
@@ -65,5 +67,9 @@ def receipts_method_tests():
     
     bananas = receipts.Item('Bananas', 0.79, 1.8)
     pears = receipts.Item('Pears', 1.49, 4)
+    napkins = receipts.Item('Napkins', 2.0, 1, True)
+    receipt.add_item(bananas)
+    receipt.add_item(pears)
+    receipt.add_item(napkins)
     
-    
+    print(str(receipt))
