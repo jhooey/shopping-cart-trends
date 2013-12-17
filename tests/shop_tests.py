@@ -1,7 +1,7 @@
 from nose.tools import *
 import grocerytrends.receipts as receipts
 
-def shop_init_tests():
+def receipt_init_tests():
     print ("Testing the Province Class")
     
     quebec = receipts.Province("Quebec", "QC", 13) 
@@ -47,3 +47,16 @@ def shop_init_tests():
                     )
            )
     print ('Receipt Tax: {}'.format(receipt.tax))
+
+
+    bananas = receipts.Item('Bananas', 0.79, 1.8)
+    
+    print ('Item Name : {}'.format(bananas.name))
+    print ('Item Price : {}'.format(bananas.price))
+    print ('Item Quantity: {}'.format(bananas.quantity))
+    print ('Item Taxed? {}'.format(bananas.taxed))
+
+def receipts_method_tests():
+    quebec = receipts.Province("Quebec", "QC", 13)
+    loblaws = receipts.Store("Loblaws", quebec) 
+    receipt = receipts.Receipt(loblaws)

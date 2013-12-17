@@ -8,8 +8,8 @@ shopping at and in which Province the Store is locate. Most importantly you
 can create item objects that can be attached to your receipt
 """
 
-
 import datetime
+
 
 class Province(object):
     """Physical Location, used to separate different tax regions"""
@@ -26,6 +26,7 @@ class Store(object):
     def __init__(self, name, province):
         self.name = name
         self.province = province
+     
         
 class Receipt(object):
     """
@@ -44,9 +45,28 @@ class Receipt(object):
         
         self.tax = store.province.taxes
         
+    def _add_to_total(self, item):
+        self.total += item.total_cost(self.tax)
+    
+    def _remove_from_total(self, item):
+        self.total += item.total_cost(self.tax)
+    
+    def recalculate_total(self):
+        self.total = 0
+        for item in self.items:
+            self.total += item.total_cost(self.tax)
+        
 class Item(object):
     """A single item purchased at a Store"""
     
-    def __init__(self, name, price, taxed=False):
+    def __init__(self, name, price, quantity=1, taxed=False):
         self.name = name
         self.price = price
+        self.quantity = quantity
+        self.taxed = taxed
+        
+    def total_cost(self,tax):
+        if self.taxed:
+            return (self.quantity *self.price) * (1 + self.tax/100)
+        else:
+            return (self.quantity *self.price)
