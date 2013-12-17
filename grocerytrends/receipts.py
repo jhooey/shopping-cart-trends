@@ -1,11 +1,12 @@
 """
-This module contains everything necessary to describe your latest shopping
-trip.
+This module contains everything necessary to describe your latest 
+shopping trip.
 
-The main purpose of this module is to give you everything you need to create
-and maintain a Receipt object. You can specify which Grocery Store you were 
-shopping at and in which Province the Store is locate. Most importantly you 
-can create item objects that can be attached to your receipt
+The main purpose of this module is to give you everything you need to 
+create and maintain a Receipt object. You can specify which Store you 
+were shopping at and in which Province the Store is locate. Most 
+importantly you can create item objects that can be attached to your 
+receipt
 """
 
 import datetime
@@ -32,8 +33,8 @@ class Receipt(object):
     """
     Collection of Items describing a trip to a store
     
-    Records the tax rate at the time of entry so that it does not change if 
-    the provincial tax rate changes.
+    Records the tax rate at the time of entry so that it does not change
+    if the provincial tax rate changes.
     """
     
     def __init__(self, store, purchase_date=datetime.date.today()):
@@ -58,7 +59,9 @@ class Receipt(object):
         
     
     def total(self):
-        """Takes the total_cost for each item and adds them to get a total"""
+        """
+        Takes the total_cost for each item and adds them to get a total
+        """
         total = 0
         for item in self.items:
             total += item.total_cost(self.tax)
@@ -68,8 +71,8 @@ class Receipt(object):
         """
         Adds a COPY of the submitted item
         
-        A copy is used because receipts are supposed to be snapshots in time
-        and then we can reuse the item for other receipts 
+        A copy is used because receipts are supposed to be snapshots 
+        in time and then we can reuse the item for other receipts 
         """
         self.items.append(copy.deepcopy(item))
         
@@ -88,6 +91,10 @@ class Item(object):
                          'QTY:', str(self.quantity) ])
     
     def total_cost(self,tax):
+        """
+        returns the total_cost of an item based on price, 
+        quantity and taxes
+        """
         if self.taxed:
             return (self.quantity * self.price) * (1 + tax/100)
         else:
