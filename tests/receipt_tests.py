@@ -1,31 +1,31 @@
 from nose.tools import *
-import unittest
 import grocerytrends.receipt as receipt
 
-def setup_func():
-    quebec = receipt.Province("Quebec", "QC", 13)
-    loblaws = receipt.Store("Loblaws", quebec) 
+class test_Receipt:
+    def setup_func(self):
+        self.quebec = receipt.Province("Quebec", "QC", 13)
+        self.loblaws = receipt.Store("Loblaws", self.quebec) 
+        
+        self.loblaws_receipt = receipt.Receipt(self.loblaws)
+        
+        self.bananas = receipt.Item('Bananas', 0.79, 1.8)
+        self.pears = receipt.Item('Pears', 1.49, 4)
+        self.napkins = receipt.Item('Napkins', 2.0, 1, True)
     
+    def teardown_func(self):
+        self.quebec = None
+        self.loblaws = None
+        self.loblaws_receipt = None
+        
+        self.bananas = None
+        self.pears = None
+        self.napkins = None
     
-    global loblaws_receipt
-    loblaws_receipt = receipt.Receipt(loblaws)
-    
-    global bananas
-    bananas = receipt.Item('Bananas', 0.79, 1.8)
-    pears = receipt.Item('Pears', 1.49, 4)
-    napkins = receipt.Item('Napkins', 2.0, 1, True)
-
-def teardown_func():
-    quebec = None
-    loblaws = None
-    loblaws_receipt = None
-    
-    bananas = None
-    pears = None
-    napkins = None
-
-@with_setup(setup_func, teardown_func)
-def test_Receipt_add_item():
-    assert not loblaws_receipt.items
-    loblaws_receipt.add_item(bananas)
-    assert loblaws_receipt.items
+    def test_Receipt_add_item(self):
+        self.setup_func()
+        try:
+            assert not self.loblaws_receipt.items
+            self.loblaws_receipt.add_item(self.bananas)
+            assert self.loblaws_receipt.items
+        finally:
+            self.teardown_func()
