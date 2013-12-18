@@ -32,7 +32,6 @@ class test_Receipt(unittest.TestCase):
         self.loblaws_receipt = receipt.Receipt(self.loblaws)
         
         self.bananas = receipt.Item('Bananas', 0.79, 1.8)
-        self.pears = receipt.Item('Pears', 1.49, 4)
         self.napkins = receipt.Item('Napkins', 2.0, 1, True)
     
     def tearDown(self):
@@ -50,3 +49,18 @@ class test_Receipt(unittest.TestCase):
         assert self.loblaws_receipt.items
         self.loblaws_receipt.remove_item_by_name(self.bananas.name)
         assert not self.loblaws_receipt.items
+        
+        
+    def test_Receipt_add_remove_item(self):
+        self.assertAlmostEqual(self.loblaws_receipt.total(),0.0)
+        
+        self.loblaws_receipt.add_item(self.bananas)
+        self.assertAlmostEqual(self.loblaws_receipt.total(),1.422)
+        
+        self.loblaws_receipt.add_item(self.napkins)
+        self.assertAlmostEqual(self.loblaws_receipt.total(),3.682)
+        
+        self.loblaws_receipt.remove_item_by_name(self.bananas.name)
+        self.assertAlmostEqual(self.loblaws_receipt.total(),2.26)
+
+        
