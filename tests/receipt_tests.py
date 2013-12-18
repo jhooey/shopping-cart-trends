@@ -50,7 +50,7 @@ class test_Receipt(unittest.TestCase):
         assert not self.loblaws_receipt.items
         
         
-    def test_Receipt_add_remove_item(self):
+    def test_Receipt_total(self):
         self.assertAlmostEqual(self.loblaws_receipt.total(),0.0)
         
         self.loblaws_receipt.add_item(self.bananas)
