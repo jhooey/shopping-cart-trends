@@ -1,6 +1,24 @@
 from nose.tools import *
 import grocerytrends.receipt as receipt
 
+
+class test_Item:
+    
+    def setUp(self):
+        self.bananas = receipt.Item('Bananas', 0.79, 1.8)
+        self.pears = receipt.Item('Pears', 1.49, 4)
+        self.napkins = receipt.Item('Napkins', 2.0, 1, True)
+    
+    def tearDown(self):
+        self.bananas = None
+        self.pears = None
+        self.napkins = None
+    
+
+
+
+
+
 class test_Receipt:
     
     def setUp(self):
@@ -28,4 +46,3 @@ class test_Receipt:
         assert self.loblaws_receipt.items
         self.loblaws_receipt.remove_item_by_name(self.bananas.name)
         assert not self.loblaws_receipt.items
-        print('done')
