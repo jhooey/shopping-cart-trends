@@ -15,13 +15,12 @@ class test_Item(unittest.TestCase):
         self.pears = None
         self.napkins = None
     
-    def test_total_cost(self):
+    def test_Item_total_cost(self):
         #Item without tax, but tax still has to be passed
         self.assertAlmostEqual(self.bananas.total_cost(13.0),1.422)
 
         #Item with tax
         self.assertAlmostEqual(self.napkins.total_cost(13.0), 2.26)
-        
 
 class test_Receipt(unittest.TestCase):
     
@@ -62,5 +61,3 @@ class test_Receipt(unittest.TestCase):
         
         self.loblaws_receipt.remove_item_by_name(self.bananas.name)
         self.assertAlmostEqual(self.loblaws_receipt.total(),2.26)
-
-        
