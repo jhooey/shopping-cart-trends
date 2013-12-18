@@ -8,3 +8,22 @@ class User(object):
         self.password = password
         self.receipts = []
         
+    def __str__(self):
+        return ''.join([self.first_name, ' ', self.last_name, 
+                        ' (', self.username, ')'])
+        
+def create_password():
+    first_entry = ''
+    second_entry = '#'
+    
+    while first_entry != second_entry:
+        print("For security purposes, please enter a password?")
+        first_entry = raw_input('> ')
+        print("Could you confirm that for me?")
+        second_entry = raw_input('> ')
+        
+        if first_entry != second_entry:
+            print("Sorry, those passwords don't match. Can you try again.")
+    
+    return first_entry
+        
