@@ -1,8 +1,9 @@
 from nose.tools import *
+import unittest
 import grocerytrends.receipt as receipt
 
 
-class test_Item:
+class test_Item(unittest.TestCase):
     
     def setUp(self):
         self.bananas = receipt.Item('Bananas', 0.79, 1.8)
@@ -14,12 +15,15 @@ class test_Item:
         self.pears = None
         self.napkins = None
     
+    def test_total_cost(self):
+        #Item without tax, but tax still has to be passed
+        self.assertAlmostEqual(self.bananas.total_cost(13.0),1.422)
 
+        #Item with tax
+        self.assertAlmostEqual(self.napkins.total_cost(13.0), 2.26)
+        
 
-
-
-
-class test_Receipt:
+class test_Receipt(unittest.TestCase):
     
     def setUp(self):
         self.quebec = receipt.Province("Quebec", "QC", 13)

@@ -97,6 +97,8 @@ class Item(object):
         """
         returns the total_cost of an item based on price, 
         quantity and taxes
+        
+        tax must be a float
         """
         if self.taxed:
             return (self.quantity * self.price) * (1 + tax/100)
