@@ -2,7 +2,8 @@ from nose.tools import *
 import grocerytrends.receipt as receipt
 
 class test_Receipt:
-    def setup_func(self):
+    
+    def setUp(self):
         self.quebec = receipt.Province("Quebec", "QC", 13)
         self.loblaws = receipt.Store("Loblaws", self.quebec) 
         
@@ -12,7 +13,7 @@ class test_Receipt:
         self.pears = receipt.Item('Pears', 1.49, 4)
         self.napkins = receipt.Item('Napkins', 2.0, 1, True)
     
-    def teardown_func(self):
+    def tearDown(self):
         self.quebec = None
         self.loblaws = None
         self.loblaws_receipt = None
@@ -22,10 +23,6 @@ class test_Receipt:
         self.napkins = None
     
     def test_Receipt_add_item(self):
-        self.setup_func()
-        try:
-            assert not self.loblaws_receipt.items
-            self.loblaws_receipt.add_item(self.bananas)
-            assert self.loblaws_receipt.items
-        finally:
-            self.teardown_func()
+        assert not self.loblaws_receipt.items
+        self.loblaws_receipt.add_item(self.bananas)
+        assert self.loblaws_receipt.items
