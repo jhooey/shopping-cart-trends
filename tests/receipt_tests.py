@@ -22,7 +22,10 @@ class test_Receipt:
         self.pears = None
         self.napkins = None
     
-    def test_Receipt_add_item(self):
+    def test_Receipt_add_remove_item(self):
         assert not self.loblaws_receipt.items
         self.loblaws_receipt.add_item(self.bananas)
         assert self.loblaws_receipt.items
+        self.loblaws_receipt.remove_item_by_name(self.bananas.name)
+        assert not self.loblaws_receipt.items
+        print('done')
