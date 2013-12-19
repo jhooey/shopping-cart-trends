@@ -11,6 +11,13 @@ class User(object):
     def __str__(self):
         return ''.join([self.first_name, ' ', self.last_name, 
                         ' (', self.username, ')'])
+    
+    def add_receipt(self, receipt):
+        """
+        Adds a receipt object to the user
+        """
+        self.items.append(receipt)
+    
         
 def create_password():
     first_entry = ''
@@ -26,4 +33,3 @@ def create_password():
             print("Sorry, those passwords don't match. Can you try again.")
     
     return first_entry
-        
