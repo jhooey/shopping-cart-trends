@@ -17,12 +17,18 @@ def create_store(province):
 
     return receipt.Store(store_name, province) 
     
-#def create_receipt():
-#    new_item = True
-#   while new_item:
-#       print("Do you have another Item to add?")
-#       new_item = ask_yes_no_question()
+def create_receipt(store):
+    store_receipt = receipt.Receipt(store)
+    
+    new_item = True
+    while new_item:
+        store_receipt.add_item(create_item())
+        
+        print("Do you have another Item to add?")
+        new_item = ask_yes_no_question()
 
+    return store_receipt
+    
 def create_item():
     print("What is the name of the item?")
     item_name = raw_input('> ')
@@ -61,5 +67,7 @@ user1 = user.User(first_name, last_name, username)
 
 print (str(user1))
 
-print (str(create_item().total_cost(13.0)))
-print (str(create_item().total_cost(13.0)))
+province = create_province()
+store = create_store(province)
+
+print (str(create_receipt(store)))
