@@ -48,8 +48,6 @@ last_name = raw_input('> ')
 print("What do you want as your username?")
 username = raw_input('> ')
 
-password = user.create_password()
-
-user1 = user.User(first_name, last_name, username, password)
+user1 = user.User(first_name, last_name, username)
 
 print (str(user1))
