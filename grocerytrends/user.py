@@ -6,11 +6,11 @@ class User(Base):
     """Docstring"""
     __tablename__ = 'users'
 
-    id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
-    username = Column(String)
-    password = Column(String)
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    first_name = Column(String(50))
+    last_name = Column(String(50))
+    username = Column(String(50))
+    password = Column(String(20))
 
     def __init__(self, first_name, last_name, username):
         self.first_name = first_name
