@@ -20,7 +20,7 @@ class User(Base):
     
     def __str__(self):
         return ''.join([self.first_name, ' ', self.last_name, 
-                        ' (', self.username, ')', self.password])
+                        ' (', self.username, ')'])
     
     def add_receipt(self, receipt):
         """

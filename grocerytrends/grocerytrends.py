@@ -22,6 +22,17 @@ def check_pwd(session_user):
     return input_password == session_user.password
 
 
+def create_user():
+    print("What's your first name?")
+    first_name = raw_input('> ')
+    print("What's your last name?")
+    last_name = raw_input('> ')
+    print("What do you want as your username?")
+    username = raw_input('> ')
+    
+    session.add(user.User(first_name, last_name, username))
+    session.commit()
+
 def create_province():
     print("What is the name of the province?")
     province_name = raw_input('> ')
@@ -88,11 +99,12 @@ print("We can start by figuring out who's here.")
 logged_in = False
     
 while not logged_in:
-    print("Are you already registered?")
+    print("Are you registered?")
     if ask_yes_no_question():    
         logged_in, session_user = login()
     else:
         create_user()
+        print("Let's restart the login process")
 
 print (str(session_user))
 
