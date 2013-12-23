@@ -9,7 +9,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
-    last_name = Column(String)
+    username = Column(String)
     password = Column(String)
 
     def __init__(self, first_name, last_name, username):
