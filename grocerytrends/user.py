@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String
-from database import Base
+from sqlalchemy import Column, Integer, String, Sequence
+from database import Base,engine
 
 
 class User(Base):
@@ -17,10 +17,10 @@ class User(Base):
         self.last_name = last_name
         self.username = username
         self.password = self.create_password()
-        
+    
     def __str__(self):
         return ''.join([self.first_name, ' ', self.last_name, 
-                        ' (', self.username, ')'])
+                        ' (', self.username, ')', self.password])
     
     def add_receipt(self, receipt):
         """
@@ -42,3 +42,5 @@ class User(Base):
                 print("Sorry, those passwords don't match. Can you try again.")
         
         return first_entry
+
+Base.metadata.create_all(engine)

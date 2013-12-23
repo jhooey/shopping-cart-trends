@@ -1,5 +1,8 @@
 import receipt
 import user
+from database import Base, engine
+
+from sqlalchemy.orm import sessionmaker
 
 def create_province():
     print("What is the name of the province?")
@@ -53,7 +56,14 @@ def ask_yes_no_question():
         if answer.lower() == 'no' or  answer.lower() == 'n':
             return False
 
+"""
+The Main Program
+"""
 
+Session = sessionmaker(bind=engine)
+session = Session()
+
+"""
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 print("What's your first name?")
@@ -64,10 +74,19 @@ print("What do you want as your username?")
 username = raw_input('> ')
 
 user1 = user.User(first_name, last_name, username)
+"""
+
+user1 = user.User('Jacob', 'Hooey', 'jhooey')
+
+
+session.add(user1)
 
 print (str(user1))
 
-province = create_province()
-store = create_store(province)
+our_user = session.query(user.User).filter_by(first_name='Jacob').first() 
+print (str(our_user))
 
-print (str(create_receipt(store)))
+#province = create_province()
+#store = create_store(province)
+
+#print (str(create_receipt(store)))
