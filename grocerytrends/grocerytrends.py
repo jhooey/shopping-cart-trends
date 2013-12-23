@@ -4,6 +4,24 @@ from database import Base, engine
 
 from sqlalchemy.orm import sessionmaker
 
+def login():
+    print("What is your username?")
+    session_user = session.query(user.User).filter_by(
+                                                      username=raw_input('> ')
+                                                      ).first() 
+    if session_user:
+        return check_pwd(session_user), session_user
+    else:
+        print("Sorry we could not find your username")
+        return False, None 
+
+def check_pwd(session_user):
+    print("What is your password?")
+    input_password = raw_input('> ')
+    
+    return input_password == session_user.password
+
+
 def create_province():
     print("What is the name of the province?")
     province_name = raw_input('> ')
@@ -63,28 +81,21 @@ The Main Program
 Session = sessionmaker(bind=engine)
 session = Session()
 
-"""
+
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
-print("What's your first name?")
-first_name = raw_input('> ')
-print("What's your last name?")
-last_name = raw_input('> ')
-print("What do you want as your username?")
-username = raw_input('> ')
 
-user1 = user.User(first_name, last_name, username)
-"""
+logged_in = False
+    
+while not logged_in:
+    print("Are you already registered?")
+    if ask_yes_no_question():    
+        logged_in, session_user = login()
+    else:
+        create_user()
 
-user1 = user.User('Jacob', 'Hooey', 'jhooey')
+print (str(session_user))
 
-
-session.add(user1)
-
-print (str(user1))
-
-our_user = session.query(user.User).filter_by(first_name='Jacob').first() 
-print (str(our_user))
 
 #province = create_province()
 #store = create_store(province)
