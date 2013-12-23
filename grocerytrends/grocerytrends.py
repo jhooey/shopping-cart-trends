@@ -106,7 +106,7 @@ while not logged_in:
         create_user()
         print("Let's restart the login process")
 
-print (str(session_user))
+print ("Welcome, " + str(session_user))
 
 
 #province = create_province()
