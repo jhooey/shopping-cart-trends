@@ -1,5 +1,6 @@
 *.py[cod]
 *.pyc
+*.db-journal
 
 # C extensions
 *.so
