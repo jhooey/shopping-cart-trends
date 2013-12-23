@@ -7,6 +7,6 @@ A python application that takes your grocery receipts as an input and analyses t
 Required Software
 -----------------
 
-Nose - http://nose.readthedocs.org/en/latest/
+Nose - http://nose.readthedocs.org/en/latest/  
 SQLAlchemy - http://www.sqlalchemy.org/
 
