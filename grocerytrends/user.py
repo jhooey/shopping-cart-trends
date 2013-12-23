@@ -42,5 +42,3 @@ class User(Base):
                 print("Sorry, those passwords don't match. Can you try again.")
         
         return first_entry
-
-Base.metadata.create_all(engine)
