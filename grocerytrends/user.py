@@ -1,3 +1,5 @@
+import database
+
 class User(object):
     """Docstring"""
     
