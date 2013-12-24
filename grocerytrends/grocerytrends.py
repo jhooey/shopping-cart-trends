@@ -1,8 +1,7 @@
-import receipt
-import user
 from database import Base, engine
-
 from sqlalchemy.orm import sessionmaker
+
+import user
 
 def login():
     print("What is your username?")
@@ -41,7 +40,8 @@ def create_province():
     print("What is the tax rate in % for this province?")
     province_taxes = float(raw_input('> '))
 
-    return receipt.Province(province_name, province_abbr, province_taxes)
+    session.add(receipt.Province(province_name, province_abbr, province_taxes))
+    session.commit()
 
 def create_store(province):
     print("What is the name of the store?")
@@ -108,6 +108,7 @@ while not logged_in:
 
 print ("Welcome, " + str(session_user))
 
+create_province()
 
 #province = create_province()
 #store = create_store(province)

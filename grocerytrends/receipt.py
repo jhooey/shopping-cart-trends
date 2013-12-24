@@ -8,12 +8,20 @@ were shopping at and in which Province the Store is locate. Most
 importantly you can create item objects that can be attached to your 
 receipt
 """
+from sqlalchemy import Column, Integer, String, Sequence, Float
+from database import Base,engine
 
 import datetime
 import copy
 
 class Province(object):
     """Physical Location, used to separate different tax regions"""
+    __tablename__ = 'provinces'
+
+    id = Column(Integer, Sequence('province_id_seq'), primary_key=True)
+    name = Column(String(50))
+    abbreviation = Column(String(10))
+    taxes = Column(Float())
     
     def __init__(self, name, abbr, taxes):
         self.name = name
