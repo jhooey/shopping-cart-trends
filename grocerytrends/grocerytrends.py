@@ -2,6 +2,7 @@ from database import Base, engine
 from sqlalchemy.orm import sessionmaker
 
 import user
+import receipt
 
 def login():
     print("What is your username?")
@@ -88,6 +89,8 @@ def ask_yes_no_question():
 """
 The Main Program
 """
+#This initializes all of the tables in the DB
+Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()

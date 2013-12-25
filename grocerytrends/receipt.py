@@ -9,12 +9,12 @@ importantly you can create item objects that can be attached to your
 receipt
 """
 from sqlalchemy import Column, Integer, String, Sequence, Float
-from database import Base,engine
+from database import Base
 
 import datetime
 import copy
 
-class Province(object):
+class Province(Base):
     """Physical Location, used to separate different tax regions"""
     __tablename__ = 'provinces'
 
