@@ -1,6 +1,7 @@
 from globalmethods import ask_yes_no_question
 
 def login():
+    """Checks if a user exists and is logged in"""
     logged_in = False
         
     while not logged_in:
@@ -13,6 +14,7 @@ def login():
     return session_user
             
 def check_user():
+    """Checks to see if the username can be found in the database"""
     print("What is your username?")
     session_user = session.query(user.User).filter_by(
                                                       username=raw_input('> ')
@@ -24,12 +26,14 @@ def check_user():
         return False, None 
 
 def check_pwd(session_user):
+    """Compares the inputed password  with the one stored in the db"""
     print("What is your password?")
     input_password = raw_input('> ')
     
     return input_password == session_user.password
 
 def create_user():
+    """Gathers the info necessary to create a new user"""
     print("What's your first name?")
     first_name = raw_input('> ')
     print("What's your last name?")

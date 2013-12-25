@@ -1,7 +1,5 @@
 def ask_yes_no_question():
-    """
-    Asks the user to answer yes or no, returns true or false respectively
-    """
+    """Asks the user to answer yes or no, returns a boolean"""
     while True:
         answer = raw_input('Yes or No? ')
         

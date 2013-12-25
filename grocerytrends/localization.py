@@ -25,6 +25,7 @@ class Store(object):
      
 
 def create_province(session):
+    """Gathers all the necessary info to create a new province"""
     print("What is the name of the province?")
     province_name = raw_input('> ')
     print("What is the abbreviation for the province?")
@@ -36,6 +37,7 @@ def create_province(session):
     session.commit()
 
 def create_store(province):
+    """Gathers all the necessary info to create a new store"""
     print("What is the name of the store?")
     store_name = raw_input('> ')
 

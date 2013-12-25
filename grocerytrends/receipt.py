@@ -3,10 +3,8 @@ This module contains everything necessary to describe your latest
 shopping trip.
 
 The main purpose of this module is to give you everything you need to 
-create and maintain a Receipt object. You can specify which Store you 
-were shopping at and in which Province the Store is locate. Most 
-importantly you can create item objects that can be attached to your 
-receipt
+create and maintain a Receipt object. You can create item objects that 
+can be attached to your receipt
 """
 from sqlalchemy import Column, Integer, String, Sequence, Float
 from database import Base

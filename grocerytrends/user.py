@@ -1,9 +1,13 @@
+"""
+This module managers everything regarding the person using the app
+
+"""
+
 from sqlalchemy import Column, Integer, String, Sequence
 from database import Base
 
-
 class User(Base):
-    """Docstring"""
+    """The class that identifies the person using the application"""
     __tablename__ = 'users'
 
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
