@@ -10,32 +10,10 @@ receipt
 """
 from sqlalchemy import Column, Integer, String, Sequence, Float
 from database import Base
+from globalmethods import ask_yes_no_question
 
 import datetime
 import copy
-
-class Province(Base):
-    """Physical Location, used to separate different tax regions"""
-    __tablename__ = 'provinces'
-
-    id = Column(Integer, Sequence('province_id_seq'), primary_key=True)
-    name = Column(String(50))
-    abbreviation = Column(String(10))
-    taxes = Column(Float())
-    
-    def __init__(self, name, abbr, taxes):
-        self.name = name
-        self.abbreviation = abbr
-        self.taxes = float(taxes)
-        
-
-class Store(object):
-    """Physical Location where the Receipt was created"""
-    
-    def __init__(self, name, province):
-        self.name = name
-        self.province = province
-     
         
 class Receipt(object):
     """
@@ -112,3 +90,27 @@ class Item(object):
             return (self.quantity * self.price) * (1 + tax/100)
         else:
             return (self.quantity *self.price)
+        
+def create_receipt(store):
+    store_receipt = receipt.Receipt(store)
+    
+    new_item = True
+    while new_item:
+        store_receipt.add_item(create_item())
+        
+        print("Do you have another Item to add?")
+        new_item = ask_yes_no_question()
+
+    return store_receipt
+    
+def create_item():
+    print("What is the name of the item?")
+    item_name = raw_input('> ')
+    print("What is the Price/QTY?")
+    item_price = float(raw_input('> '))
+    print("What is the QTY?")
+    item_qty = float(raw_input('> '))
+    print("Is this item taxed?")
+    item_taxed = ask_yes_no_question()
+    
+    return receipt.Item(item_name, item_price, item_qty, item_taxed)

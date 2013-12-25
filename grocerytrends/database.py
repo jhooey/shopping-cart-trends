@@ -7,4 +7,4 @@ engine = create_engine('sqlite:///test.db', echo=True)
 Base = declarative_base()
 
 #This initializes all of the tables in the DB
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)
