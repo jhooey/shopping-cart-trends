@@ -33,7 +33,7 @@ def create_province(session):
     print("What is the tax rate in % for this province?")
     province_taxes = float(raw_input('> '))
 
-    session.add(receipt.Province(province_name, province_abbr, province_taxes))
+    session.add(Province(province_name, province_abbr, province_taxes))
     session.commit()
 
 def create_store(province):

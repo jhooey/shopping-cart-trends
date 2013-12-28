@@ -16,4 +16,4 @@ def db_init():
     Base.metadata.create_all(engine)
     
     Session = sessionmaker(bind=engine)
-    session = Session()
+    return Session()

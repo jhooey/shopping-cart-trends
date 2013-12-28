@@ -9,17 +9,14 @@ from database import db_init
 from authorization import login
 from localization import create_province
 
-import user
-import receipt
-
-db_init()
+session = db_init()
 
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-session_user = login()
+session_user = login(session)
 
 print ("Welcome, " + str(session_user))
 
 
-create_province()
+create_province(session)

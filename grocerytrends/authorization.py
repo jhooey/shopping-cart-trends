@@ -1,19 +1,20 @@
 from globalmethods import ask_yes_no_question
+import user
 
-def login():
+def login(session):
     """Checks if a user exists and is logged in"""
     logged_in = False
         
     while not logged_in:
         print("Are you registered?")
         if ask_yes_no_question():    
-            logged_in, session_user = check_user()
+            logged_in, session_user = check_user(session)
         else:
-            create_user()
+            create_user(session)
             print("Let's restart the login process")
     return session_user
             
-def check_user():
+def check_user(session):
     """Checks to see if the username can be found in the database"""
     print("What is your username?")
     session_user = session.query(user.User).filter_by(
@@ -32,7 +33,7 @@ def check_pwd(session_user):
     
     return input_password == session_user.password
 
-def create_user():
+def create_user(session):
     """Gathers the info necessary to create a new user"""
     print("What's your first name?")
     first_name = raw_input('> ')
