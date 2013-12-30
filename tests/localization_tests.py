@@ -3,8 +3,8 @@ import unittest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from grocerytrends.database import Base
-from grocerytrends.localization import Province, Store
+from shoppingtrends.database import Base
+from shoppingtrends.localization import Province, Store
 
 
 class test_Province(unittest.TestCase):

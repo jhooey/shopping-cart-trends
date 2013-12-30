@@ -1,6 +1,6 @@
 from nose.tools import *
 import unittest
-import grocerytrends.receipt as receipt
+import shoppingtrends.receipt as receipt
 
 
 class test_Item(unittest.TestCase):
