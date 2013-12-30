@@ -1,5 +1,7 @@
 from database import Base
 from sqlalchemy import Column, Integer, String, Sequence, Float
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship, backref
 
 class Province(Base):
     """Physical Location, used to separate different tax regions"""
@@ -10,14 +12,27 @@ class Province(Base):
     abbreviation = Column(String(10))
     taxes = Column(Float())
     
+    stores = relationship("Store", 
+                          order_by="Store.id", 
+                          backref="province")
+    
     def __init__(self, name, abbr, taxes):
         self.name = name
         self.abbreviation = abbr
         self.taxes = float(taxes)
         
 
-class Store(object):
+class Store(Base):
     """Physical Location where the Receipt was created"""
+    __tablename__ = 'stores'
+    
+    id = Column(Integer, Sequence('store_id_seq'), primary_key=True)
+    name = Column(String(50))
+    province_id = Column(Integer, ForeignKey('provinces.id'))
+    
+    province = relationship("Province", backref=backref('stores', 
+                                                        order_by=id))
+    
     
     def __init__(self, name, province):
         self.name = name
