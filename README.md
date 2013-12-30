@@ -1,4 +1,4 @@
-Grocery Cart Trends
+Shopping Cart Trends
 ===================
 
 A python application that takes your receipts as an input and analyses that data to give you trends. Also will include a list option that gives you a cost estimate.
