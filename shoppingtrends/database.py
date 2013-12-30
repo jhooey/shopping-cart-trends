@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker
 Base = declarative_base()
 
 
-def db_init(conn_str):
+def db_init(conn_str, auto_populate=True):
     engine = create_engine(conn_str, echo=True)
     
     """Sets all the initial database requirements"""
@@ -18,3 +18,8 @@ def db_init(conn_str):
     
     Session = sessionmaker(bind=engine)
     return Session()
+    
+
+
+
+    
