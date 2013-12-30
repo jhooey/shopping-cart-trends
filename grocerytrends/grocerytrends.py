@@ -9,14 +9,14 @@ from database import db_init
 from authorization import login
 from localization import create_province, Store
 
-session = db_init()
+session = db_init('sqlite:///test.db')
 
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-#session_user = login(session)
+session_user = login(session)
 
-#print ("Welcome, " + str(session_user))
+print ("Welcome, " + str(session_user))
 
 
 province = create_province()
