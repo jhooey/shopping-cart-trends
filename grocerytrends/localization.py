@@ -34,9 +34,9 @@ class Store(Base):
                                                         order_by=id))
     
     
-    def __init__(self, name, province):
+    def __init__(self, name, province_id):
         self.name = name
-        self.province = province
+        self.province_id = province_id
      
 
 def create_province(session):
