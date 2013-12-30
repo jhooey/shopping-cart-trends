@@ -12,9 +12,9 @@ class Province(Base):
     abbreviation = Column(String(10))
     taxes = Column(Float())
     
-    stores = relationship("Store", 
-                          order_by="Store.id", 
-                          backref="province")
+    #stores = relationship("Store", 
+    #                      order_by="Store.id", 
+    #                      backref="province")
     
     def __init__(self, name, abbr, taxes):
         self.name = name
@@ -34,12 +34,11 @@ class Store(Base):
                                                         order_by=id))
     
     
-    def __init__(self, name, province_id):
+    def __init__(self, name):
         self.name = name
-        self.province_id = province_id
      
 
-def create_province(session):
+def create_province():
     """Gathers all the necessary info to create a new province"""
     print("What is the name of the province?")
     province_name = raw_input('> ')
@@ -47,13 +46,12 @@ def create_province(session):
     province_abbr = raw_input('> ')
     print("What is the tax rate in % for this province?")
     province_taxes = float(raw_input('> '))
+    
+    return Province(province_name, province_abbr, province_taxes)
 
-    session.add(Province(province_name, province_abbr, province_taxes))
-    session.commit()
-
-def create_store(province):
+def create_store():
     """Gathers all the necessary info to create a new store"""
     print("What is the name of the store?")
     store_name = raw_input('> ')
 
-    return receipt.Store(store_name, province)
+    return receipt.Store(store_name)
