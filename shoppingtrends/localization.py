@@ -4,10 +4,13 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
 
 class Country(Base):
-    """Physical Location, separated into different governmental bodies"""
+    """
+    Physical Location, separated into different governmental bodies
+    
+    Purpose: To contain a collection of provinces
+    """
     __tablename__ = 'countries'
 
-    
     country_code = Column(String(3), primary_key=True)
     name = Column(String(50))
     
