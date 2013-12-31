@@ -15,7 +15,10 @@ from localization import create_province, Store
 
 db_exists = os.path.isfile('test.db')
 
-session = db_init('sqlite:///test.db')
+db = 'sqlite:///:memory:'
+db = 'sqlite:///test.db'
+
+session = db_init(db)
 
 if not db_exists:
     populate_all_tables(session)
@@ -23,6 +26,6 @@ if not db_exists:
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-session_user = login(session)
+#session_user = login(session)
 
-print ("Welcome, " + str(session_user))
+#print ("Welcome, " + str(session_user))
