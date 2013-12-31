@@ -7,13 +7,14 @@ class Country(Base):
     """Physical Location, separated into different governmental bodies"""
     __tablename__ = 'countries'
 
-    id = Column(String(3), primary_key=True)
+    
+    country_code = Column(String(3), primary_key=True)
     name = Column(String(50))
     
     provinces = relationship("Province", backref="country")
     
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, country_code, name):
+        self.country_code = country_code
         self.name = name
 
 class Province(Base):
@@ -24,7 +25,7 @@ class Province(Base):
     name = Column(String(50))
     abbreviation = Column(String(10))
     taxes = Column(Float())
-    country_code = Column(String(3), ForeignKey('countries.id'))
+    country_code = Column(String(3), ForeignKey('countries.country_code'))
     
     def __init__(self, name, abbr, taxes):
         self.name = name
