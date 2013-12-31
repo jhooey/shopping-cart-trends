@@ -1,10 +1,14 @@
-from localization import Province
+from localization import Province, Country
 
 def populate_all_tables(session):
     populate_provinces_tbl(session)
 
 def populate_provinces_tbl(session):
-    session.add_all([Province('Alberta','AB', 5),
+    
+    canada = Country("CAN", "Canada")
+    
+    
+    canada.provinces = [Province('Alberta','AB', 5),
                      Province('British Columbia','BC', 12),
                      Province('Manitoba','MB', 13),
                      Province('New Brunswick','NB', 13),
@@ -17,5 +21,6 @@ def populate_provinces_tbl(session):
                      Province('Quebec','QC', 14.975),
                      Province('Saskatchewan','SK', 10),
                      Province('Yukon','YT', 5)
-                     ])
+                     ]
+    session.add(canada)
     session.commit()
