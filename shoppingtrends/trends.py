@@ -35,5 +35,6 @@ province = session.query(localization.Province).filter(Province.abbreviation == 
 default_store = Store('Metro', '94 montreal road', province)
 session.add_all([session_user,default_store])
 session.commit()
-
+session_user.receipts = [Receipt(default_store)]
+session.commit()
 print ("Welcome, " + str(session_user))

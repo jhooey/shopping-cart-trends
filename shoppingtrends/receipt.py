@@ -31,6 +31,7 @@ class Receipt(Base):
     purchase_date = Column(Date)
     tax = Column(Float())
     
+    store = relationship("Store", backref='receipts')
     
     def __init__(self, store, purchase_date=datetime.date.today()):
         self.store = store

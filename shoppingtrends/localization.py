@@ -48,7 +48,6 @@ class Store(Base):
     province = relationship("Province", backref=backref('stores', 
                                                         order_by=id))
     
-    
     def __init__(self, name, address, province):
         self.name = name
         self.address = address
