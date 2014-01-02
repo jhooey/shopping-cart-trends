@@ -7,7 +7,6 @@ from sqlalchemy import Column, Integer, String, Sequence
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
 from database import Base
-from receipt import Receipt
 
 class User(Base):
     """The class that identifies the person using the application"""
