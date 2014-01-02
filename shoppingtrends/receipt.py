@@ -6,25 +6,35 @@ The main purpose of this module is to give you everything you need to
 create and maintain a Receipt object. You can create item objects that 
 can be attached to your receipt
 """
-from sqlalchemy import Column, Integer, String, Sequence, Float
+from sqlalchemy import Column, Integer, String, Sequence, Float, Date
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship, backref
+
 from database import Base
 from globalmethods import ask_yes_no_question
 
 import datetime
 import copy
         
-class Receipt(object):
+class Receipt(Base):
     """
     Collection of Items describing a trip to a store
     
     Records the tax rate at the time of entry so that it does not change
     if the provincial tax rate changes.
     """
+    __tablename__ = 'Receipts'
+    
+    id = Column(Integer, Sequence('receipt_id_seq'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    store_id = Column(Integer, ForeignKey('stores.id'))
+    purchase_date = Column(Date)
+    tax = Column(Float())
+    
     
     def __init__(self, store, purchase_date=datetime.date.today()):
         self.store = store
         self.purchase_date = purchase_date
-        self.items = []
         self.tax = store.province.taxes
     
     def __str__(self):
