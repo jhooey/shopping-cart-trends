@@ -26,6 +26,7 @@ if not db_exists:
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-#session_user = login(session)
+session_user = login(session)
 
-#print ("Welcome, " + str(session_user))
+print ("Welcome, " + str(session_user))
+

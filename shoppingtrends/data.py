@@ -4,9 +4,7 @@ def populate_all_tables(session):
     populate_provinces_tbl(session)
 
 def populate_provinces_tbl(session):
-    
     canada = Country("CAN", "Canada")
-    
     
     canada.provinces = [Province('Alberta','AB', 5),
                      Province('British Columbia','BC', 12),
