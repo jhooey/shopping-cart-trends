@@ -6,7 +6,7 @@ The main purpose of this module is to give you everything you need to
 create and maintain a Receipt object. You can create item objects that 
 can be attached to your receipt
 """
-from sqlalchemy import Column, Integer, String, Sequence, Float, Date
+from sqlalchemy import Column, Integer, String, Sequence, Float, Date, Boolean
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
 
@@ -70,19 +70,42 @@ class Receipt(Base):
         in time and then we can reuse the item for other receipts 
         """
         self.items.append(copy.deepcopy(item))
-        
+
+    """"Will not be necessary in the new db model,
+    will have to be remove item by id
     def remove_item_by_name(self, name):
         name = name.lower()
         self.items = [item for item in self.items if item.name.lower() != name]
-        
-class Item(object):
-    """A single item purchased at a Store"""
+	"""
     
-    def __init__(self, name, price, quantity=1, taxed=False):
+class Item(Base):
+    
+    """Generic Item, can be used to create Receipt Items"""
+    __tablename__ = "items"
+    id = Column(Integer, Sequence('item_id_seq'), primary_key=True)
+    name = Column(String(50))
+    description = Column(String(500))
+    #category = 
+    taxed = Column(Boolean())
+    
+    def __init__(self, name, description, taxed=True):
         self.name = name
+        self.description = description
+        self.taxed = True
+
+
+        
+class ReceiptItem(Base):
+    """A single item purchased at a Store"""
+    id = Column(Integer, Sequence('r_item_id_seq'), primary_key=True)
+    item_id = Column(Integer, ForeignKey('items.id'))
+    price = Column(Float())
+    
+    
+    def __init__(self, item, price, quantity=1):
+        self.item = item
         self.price = float(price)
         self.quantity = float(quantity)
-        self.taxed = taxed
     
     def __str__(self):
         return ' '.join([self.name, str(self.price) + '$',
@@ -95,11 +118,20 @@ class Item(object):
         
         tax must be a float
         """
-        if self.taxed:
+        if self.item.taxed:
             return (self.quantity * self.price) * (1 + tax/100)
         else:
             return (self.quantity *self.price)
-        
+       
+
+
+
+
+
+
+
+
+ 
 def create_receipt(store):
     store_receipt = receipt.Receipt(store)
     

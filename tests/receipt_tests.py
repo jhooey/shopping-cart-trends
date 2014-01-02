@@ -1,6 +1,8 @@
 from nose.tools import *
 import unittest
 import shoppingtrends.receipt as receipt
+from shoppingtrends.receipt import Receipt, Item
+from shoppingtrends.localization import Province, Store
 
 
 class test_Item(unittest.TestCase):
@@ -25,13 +27,13 @@ class test_Item(unittest.TestCase):
 class test_Receipt(unittest.TestCase):
     
     def setUp(self):
-        self.quebec = receipt.Province("Quebec", "QC", 13)
-        self.loblaws = receipt.Store("Loblaws", self.quebec) 
+        self.quebec = Province("Quebec", "QC", 13)
+        self.loblaws = Store("Loblaws", self.quebec) 
         
-        self.loblaws_receipt = receipt.Receipt(self.loblaws)
+        self.loblaws_receipt = Receipt(self.loblaws)
         
-        self.bananas = receipt.Item('Bananas', 0.79, 1.8)
-        self.napkins = receipt.Item('Napkins', 2.0, 1, True)
+        self.bananas = Item('Bananas', 0.79, 1.8)
+        self.napkins = Item('Napkins', 2.0, 1, True)
     
     def tearDown(self):
         self.quebec = None
