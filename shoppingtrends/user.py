@@ -4,7 +4,10 @@ This module managers everything regarding the person using the app
 """
 
 from sqlalchemy import Column, Integer, String, Sequence
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship, backref
 from database import Base
+from receipt import Receipt
 
 class User(Base):
     """The class that identifies the person using the application"""
@@ -15,6 +18,8 @@ class User(Base):
     last_name = Column(String(50))
     username = Column(String(50))
     password = Column(String(20))
+    
+    receipts = relationship("Receipt", backref="user")
 
     def __init__(self, first_name, last_name, username):
         self.first_name = first_name
