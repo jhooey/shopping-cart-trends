@@ -49,9 +49,10 @@ class Store(Base):
                                                         order_by=id))
     
     
-    def __init__(self, name, address):
+    def __init__(self, name, address, province):
         self.name = name
         self.address = address
+        self.province = province
 
 def create_province():
     """Gathers all the necessary info to create a new province"""
