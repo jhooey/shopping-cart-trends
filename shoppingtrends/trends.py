@@ -18,7 +18,7 @@ from receipt import Receipt, Category, Item, ReceiptItem
 db_exists = os.path.isfile('test.db')
 
 db = 'sqlite:///:memory:'
-db = 'sqlite:///test.db'
+#db = 'sqlite:///test.db'
 
 session = db_init(db)
 
@@ -57,3 +57,6 @@ receipt.items.append(receipt_item)
 session.add(item)
 session.commit()
 print ("Welcome, " + str(session_user))
+
+
+print (str(receipt))

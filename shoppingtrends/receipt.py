@@ -129,7 +129,7 @@ class ReceiptItem(Base):
         self.quantity = float(quantity)
     
     def __str__(self):
-        return ' '.join([self.name, str(self.price) + '$',
+        return ' '.join([self.item.name, str(self.price) + '$',
                          'QTY:', str(self.quantity) ])
     
     def total_cost(self,tax):
