@@ -38,25 +38,23 @@ default_store = Store('Metro', '94 montreal road', province)
 
 session.add_all([session_user,default_store])
 session.commit()
+
 receipt = Receipt(default_store)
 session_user.receipts = [receipt]
 session.commit()
 
 category = Category("Fruit")
 item = Item("Bananas", "Long yellow fruit", False)
-
 category.items.append(item)
-
-session.add(item)
+session.add_all([category, item])
 session.commit()
 
 receipt_item = ReceiptItem(item, 0.79, 1.8)
-
-receipt.items.append(receipt_item)
-
-session.add(item)
+session.add(receipt_item)
 session.commit()
+
+
+receipt.add_item(session, receipt_item)
+
 print ("Welcome, " + str(session_user))
-
-
 print (str(receipt))

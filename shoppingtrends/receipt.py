@@ -63,14 +63,10 @@ class Receipt(Base):
             total += item.total_cost(self.tax)
         return total
     
-    def add_item(self, item):
-        """
-        Adds a COPY of the submitted item
-        
-        A copy is used because receipts are supposed to be snapshots 
-        in time and then we can reuse the item for other receipts 
-        """
-        self.items.append(copy.deepcopy(item))
+    def add_item(self, session, item):
+        """Appends and commits the change to the db"""
+        self.items.append(item)
+        session.commit()
 
     """"Will not be necessary in the new db model,
     will have to be remove item by id
