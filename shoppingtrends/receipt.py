@@ -23,7 +23,7 @@ class Receipt(Base):
     Records the tax rate at the time of entry so that it does not change
     if the provincial tax rate changes.
     """
-    __tablename__ = 'Receipts'
+    __tablename__ = 'receipts'
     
     id = Column(Integer, Sequence('receipt_id_seq'), primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))
@@ -32,6 +32,7 @@ class Receipt(Base):
     tax = Column(Float())
     
     store = relationship("Store", backref='receipts')
+    items = relationship("ReceiptItem", backref="receipt")
     
     def __init__(self, store, purchase_date=datetime.date.today()):
         self.store = store
@@ -100,6 +101,7 @@ class ReceiptItem(Base):
     __tablename__ = 'receipt_items'
     
     id = Column(Integer, Sequence('r_item_id_seq'), primary_key=True)
+    receipt_id = Column(Integer, ForeignKey('receipts.id'))
     item_id = Column(Integer, ForeignKey('items.id'))
     price = Column(Float())
     quantity = Column(Float())
