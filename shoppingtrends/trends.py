@@ -13,12 +13,12 @@ from data import populate_all_tables
 from authorization import login
 from user import User
 from localization import Province, Store
-from receipt import Receipt
+from receipt import Receipt, Item, ReceiptItem
 
 db_exists = os.path.isfile('test.db')
 
 db = 'sqlite:///:memory:'
-#db = 'sqlite:///test.db'
+db = 'sqlite:///test.db'
 
 session = db_init(db)
 
@@ -42,4 +42,11 @@ session.commit()
 session_user.receipts = [Receipt(default_store)]
 session.commit()
 
+item = Item("Bananas", "Long yellow fruit", False)
+session.add(item)
+session.commit()
+
+receipt_item = ReceiptItem(item, 0.79, 1.8)
+session.add(item)
+session.commit()
 print ("Welcome, " + str(session_user))

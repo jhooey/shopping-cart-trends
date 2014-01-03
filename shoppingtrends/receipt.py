@@ -97,10 +97,14 @@ class Item(Base):
         
 class ReceiptItem(Base):
     """A single item purchased at a Store"""
+    __tablename__ = 'receipt_items'
+    
     id = Column(Integer, Sequence('r_item_id_seq'), primary_key=True)
     item_id = Column(Integer, ForeignKey('items.id'))
     price = Column(Float())
+    quantity = Column(Float())
     
+    item = relationship("Item", backref='receipt_items')
     
     def __init__(self, item, price, quantity=1):
         self.item = item
