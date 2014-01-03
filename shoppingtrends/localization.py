@@ -52,21 +52,3 @@ class Store(Base):
         self.name = name
         self.address = address
         self.province = province
-
-def create_province():
-    """Gathers all the necessary info to create a new province"""
-    print("What is the name of the province?")
-    province_name = raw_input('> ')
-    print("What is the abbreviation for the province?")
-    province_abbr = raw_input('> ')
-    print("What is the tax rate in % for this province?")
-    province_taxes = float(raw_input('> '))
-    
-    return Province(province_name, province_abbr, province_taxes)
-
-def create_store():
-    """Gathers all the necessary info to create a new store"""
-    print("What is the name of the store?")
-    store_name = raw_input('> ')
-
-    return receipt.Store(store_name)
