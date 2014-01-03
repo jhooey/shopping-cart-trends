@@ -6,6 +6,7 @@ This module managers everything regarding the person using the app
 from sqlalchemy import Column, Integer, String, Sequence
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref
+from passlib.hash import sha512_crypt
 from database import Base
 
 class User(Base):
@@ -16,7 +17,7 @@ class User(Base):
     first_name = Column(String(50))
     last_name = Column(String(50))
     username = Column(String(50))
-    password = Column(String(20))
+    password = Column(String(128))
     
     receipts = relationship("Receipt", backref="user")
 
@@ -49,4 +50,12 @@ class User(Base):
             if first_entry != second_entry:
                 print("Sorry, those passwords don't match. Can you try again.")
         
-        return first_entry
+        return sha512_crypt.encrypt(first_entry)
+    
+    
+    def check_pwd(self):
+        """Compares the inputed password  with the one stored in the db"""
+        print("What is your password?")
+        
+        
+        return sha512_crypt.verify(raw_input('> '), self.password)

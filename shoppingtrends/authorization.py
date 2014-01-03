@@ -21,17 +21,10 @@ def check_user(session):
                                                       username=raw_input('> ')
                                                       ).first() 
     if session_user:
-        return check_pwd(session_user), session_user
+        return session_user.check_pwd(), session_user
     else:
         print("Sorry we could not find your username")
         return False, None 
-
-def check_pwd(session_user):
-    """Compares the inputed password  with the one stored in the db"""
-    print("What is your password?")
-    input_password = raw_input('> ')
-    
-    return input_password == session_user.password
 
 def create_user(session):
     """Gathers the info necessary to create a new user"""

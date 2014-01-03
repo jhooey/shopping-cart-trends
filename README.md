@@ -18,6 +18,7 @@ Required Software
 
 Nose - http://nose.readthedocs.org/en/latest/  
 SQLAlchemy - http://www.sqlalchemy.org/
+Passlib - http://pythonhosted.org/passlib/
 
 Status
 ------
