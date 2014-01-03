@@ -13,7 +13,7 @@ from data import populate_all_tables
 from authorization import login
 from user import User
 from localization import Province, Store
-from receipt import Receipt, Item, ReceiptItem
+from receipt import Receipt, Category, Item, ReceiptItem
 
 db_exists = os.path.isfile('test.db')
 
@@ -42,7 +42,11 @@ receipt = Receipt(default_store)
 session_user.receipts = [receipt]
 session.commit()
 
+category = Category("Fruit")
 item = Item("Bananas", "Long yellow fruit", False)
+
+category.items.append(item)
+
 session.add(item)
 session.commit()
 

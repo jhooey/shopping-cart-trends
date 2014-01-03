@@ -78,6 +78,21 @@ class Receipt(Base):
         name = name.lower()
         self.items = [item for item in self.items if item.name.lower() != name]
 	"""
+
+class Category(Base):
+    """Collections of related Items"""
+    
+    __tablename__ = "categories"
+    
+    id = Column(Integer, Sequence('cat_seq_id'), primary_key=True)
+    name = Column(String(50))
+    description = Column(String(500))
+    
+    items = relationship("Item", backref="category")
+    
+    def __init__(self, name, description = ""):
+        self.name = name
+        self.description = description
     
 class Item(Base):
     
@@ -86,8 +101,8 @@ class Item(Base):
     id = Column(Integer, Sequence('item_id_seq'), primary_key=True)
     name = Column(String(50))
     description = Column(String(500))
-    #category = 
     taxed = Column(Boolean())
+    category_id = Column(Integer, ForeignKey('categories.id'))
     
     def __init__(self, name, description, taxed=True):
         self.name = name
