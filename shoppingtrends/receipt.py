@@ -68,12 +68,10 @@ class Receipt(Base):
         self.items.append(item)
         session.commit()
 
-    """"Will not be necessary in the new db model,
-    will have to be remove item by id
-    def remove_item_by_name(self, name):
-        name = name.lower()
-        self.items = [item for item in self.items if item.name.lower() != name]
-	"""
+    def remove_item(self, session, item):
+        session.delete(item)
+        session.commit()
+
 
 class Category(Base):
     """Collections of related Items"""

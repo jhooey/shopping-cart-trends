@@ -58,3 +58,6 @@ receipt.add_item(session, receipt_item)
 
 print ("Welcome, " + str(session_user))
 print (str(receipt))
+
+receipt.remove_item(session, receipt_item)
+print (str(receipt))
