@@ -36,18 +36,27 @@ class Authorzation(tk.Tk):
 class Login(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent) 
-        label = tk.Label(self, text="This is the start page", font=TITLE_FONT)
+        label = tk.Label(self, text="Shopping Cart Trends", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
+        
         label_username = tk.Label(self, text="username")
         label_username.pack()
-        
-        
         self.username = tk.StringVar()
         tk.Entry(self, textvariable=self.username).pack()
         
-        button1 = tk.Button(self, text="Registration", 
+        label_password = tk.Label(self, text="password")
+        label_password.pack()
+        self.password = tk.StringVar()
+        tk.Entry(self, textvariable=self.password).pack()
+        
+        
+        login_btn = tk.Button(self, text="Login", 
+                            command=lambda: controller.show_frame(Login))
+        login_btn.pack(pady=5)
+        
+        reg_btn = tk.Button(self, text="Registration", 
                             command=lambda: controller.show_frame(Register))
-        button1.pack()
+        reg_btn.pack(pady=10)
         
         
         """Checks if a user exists and is logged in
