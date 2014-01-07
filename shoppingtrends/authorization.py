@@ -38,8 +38,14 @@ class Login(tk.Frame):
         tk.Frame.__init__(self, parent) 
         label = tk.Label(self, text="This is the start page", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-
-        button1 = tk.Button(self, text="Go to Registration", 
+        label_username = tk.Label(self, text="username")
+        label_username.pack()
+        
+        
+        self.username = tk.StringVar()
+        tk.Entry(self, textvariable=self.username).pack()
+        
+        button1 = tk.Button(self, text="Registration", 
                             command=lambda: controller.show_frame(Register))
         button1.pack()
         
