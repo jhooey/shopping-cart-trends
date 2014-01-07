@@ -31,9 +31,9 @@ print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
 #session_user = login(session)
-if __name__ == "__main__":
-    app = Authorzation()
-    app.mainloop()
+#if __name__ == "__main__":
+app = Authorzation(session)
+app.mainloop()
 
 
 

@@ -53,9 +53,6 @@ class User(Base):
         return sha512_crypt.encrypt(first_entry)
     
     
-    def check_pwd(self):
-        """Compares the inputed password  with the one stored in the db"""
-        print("What is your password?")
-        
-        
-        return sha512_crypt.verify(raw_input('> '), self.password)
+    def check_pwd(self, pwd):
+        """Compares the given password with the one stored in the db"""
+        return sha512_crypt.verify(pwd, self.password)

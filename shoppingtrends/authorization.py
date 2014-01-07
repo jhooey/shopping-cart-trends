@@ -35,15 +35,19 @@ class Authorzation(tk.Tk):
 
 class Login(tk.Frame):
     def __init__(self, parent, controller):
+        self.controller = controller
+        
         tk.Frame.__init__(self, parent) 
         label = tk.Label(self, text="Shopping Cart Trends", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
         
+        #Create the Username field
         label_username = tk.Label(self, text="username")
         label_username.pack()
         self.username = tk.StringVar()
         tk.Entry(self, textvariable=self.username).pack()
         
+        #Create the password field
         label_password = tk.Label(self, text="password")
         label_password.pack()
         self.password = tk.StringVar()
@@ -51,25 +55,29 @@ class Login(tk.Frame):
         
         
         login_btn = tk.Button(self, text="Login", 
-                            command=lambda: controller.show_frame(Login))
+                            command=self._check_credentials)
         login_btn.pack(pady=5)
         
         reg_btn = tk.Button(self, text="Registration", 
                             command=lambda: controller.show_frame(Register))
         reg_btn.pack(pady=10)
         
-        
-        """Checks if a user exists and is logged in
-        logged_in = False
+    def _check_credentials(self):
+        """
+            Checks to see if the credentials match values pulled from the 
+            dbcan be found in the database
+        """
+        session_user = session.query(user.User)\
+                                    .filter_by(
+                                               username=self.username
+                                            ).first() 
+        if session_user:
+            return session_user.check_pwd(), session_user
+        else:
+            print("Sorry we could not find your username")
+            return False, None
             
-        while not logged_in:
-            print("Are you registered?")
-            if ask_yes_no_question():    
-                logged_in, session_user = check_user(session)
-            else:
-                create_user(session)
-                print("Let's restart the login process")
-        return session_user"""
+        self.controller.show_frame(Login)
     
 class Register(tk.Frame):
     def __init__(self, parent, controller):
@@ -79,19 +87,6 @@ class Register(tk.Frame):
         button = tk.Button(self, text="Go to the start page", 
                            command=lambda: controller.show_frame(Login))
         button.pack()
-    
-    
-def check_user(session):
-    """Checks to see if the username can be found in the database"""
-    print("What is your username?")
-    session_user = session.query(user.User).filter_by(
-                                                      username=raw_input('> ')
-                                                      ).first() 
-    if session_user:
-        return session_user.check_pwd(), session_user
-    else:
-        print("Sorry we could not find your username")
-        return False, None  
     
 def create_user(session):
     """Gathers the info necessary to create a new user"""
