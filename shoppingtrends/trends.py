@@ -7,13 +7,15 @@ end up with a useful piece of software.
 """
 
 import os.path
+import Tkinter as tk
 
 from database import db_init
 from data import populate_all_tables
-from authorization import login
+from authorization import Authorzation
 from user import User
 from localization import Province, Store
 from receipt import Receipt, Category, Item, ReceiptItem
+
 
 db_exists = os.path.isfile('test.db')
 
@@ -29,6 +31,12 @@ print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
 #session_user = login(session)
+if __name__ == "__main__":
+    app = Authorzation()
+    app.mainloop()
+
+
+
 session_user = User('Jacob', 'Hooey', 'jhooey')
 
 province = session.query(Province).\
