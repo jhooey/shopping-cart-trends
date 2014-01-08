@@ -47,7 +47,12 @@ session.commit()
 login = Authorzation(session)
 login.mainloop()
 
-print str(login.session_user)
+try:
+    print str(login.session_user)
+except: 
+    quit()
+    
+print "test"
 """
 
 receipt = Receipt(default_store)
