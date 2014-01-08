@@ -21,11 +21,11 @@ class User(Base):
     
     receipts = relationship("Receipt", backref="user")
 
-    def __init__(self, first_name, last_name, username):
+    def __init__(self, first_name, last_name, username, password):
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
-        self.password = self.create_password()
+        self.password = sha512_crypt.encrypt(password)
     
     def __str__(self):
         return ''.join([self.first_name, ' ', self.last_name, 
@@ -36,22 +36,6 @@ class User(Base):
         Adds a receipt object to the user
         """
         self.items.append(receipt)
-    
-    def create_password(self):
-        first_entry = ''
-        second_entry = '#'
-        
-        while first_entry != second_entry:
-            print("For security purposes, please enter a password?")
-            first_entry = raw_input('> ')
-            print("Could you confirm that for me?")
-            second_entry = raw_input('> ')
-            
-            if first_entry != second_entry:
-                print("Sorry, those passwords don't match. Can you try again.")
-        
-        return sha512_crypt.encrypt(first_entry)
-    
     
     def check_pwd(self, pwd):
         """Compares the given password with the one stored in the db"""

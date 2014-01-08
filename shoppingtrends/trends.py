@@ -31,7 +31,7 @@ print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
 
-session_user = User('Jacob', 'Hooey', 'jhooey')
+session_user = User('Jacob', 'Hooey', 'jhooey', 'p')
 
 province = session.query(Province).\
                         filter(Province.abbreviation == 'QC').first() 
