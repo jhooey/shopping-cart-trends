@@ -67,32 +67,30 @@ class Login(tk.Frame):
                               text="Login", 
                               command=self._check_credentials
                               )
-        
         login_btn.pack(pady=5)
         
-        reg_btn = tk.Button(self, text="Registration", 
-                            command=lambda: self.controller.show_frame(Register))
+        reg_btn = tk.Button(
+                            self, 
+                            text="Registration", 
+                            command=lambda:self.controller.show_frame(Register)
+                            )
         reg_btn.pack(pady=10)
         
     def _check_credentials(self):
         """
         Checks to see if the credentials match values pulled from the db
         """
-        self.session_user = self.controller.session.query(user.User)\
-                                    .filter_by(
-                                               username=str(
-                                                            self.username.get()
-                                                            )
-                                               ).first() 
+        session_user = self.controller.session.query(user.User)\
+                                .filter_by(username=str(self.username.get()))\
+                                    .first() 
         
-        self.controller.session_user = self.session_user
-        self.quit()
-        """
-        if self.session_user and self.session_user.check_pwd():
-            pass
+        if session_user and session_user.check_pwd(self.password.get()):
+            self.controller.session_user = self.session_user
+            self.quit()
         else:
             self.controller.show_frame(Login)
-        """
+
+
 class Register(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent) 
