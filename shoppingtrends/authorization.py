@@ -5,7 +5,10 @@ import user
 TITLE_FONT = ("Helvetica", 18, "bold")
 
 class Authorzation(tk.Tk):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, session, *args, **kwargs):
+        
+        self.session = session
+        
         tk.Tk.__init__(self, *args, **kwargs)
 
         # the container is where we'll stack a bunch of frames
@@ -59,7 +62,7 @@ class Login(tk.Frame):
         login_btn.pack(pady=5)
         
         reg_btn = tk.Button(self, text="Registration", 
-                            command=lambda: controller.show_frame(Register))
+                            command=lambda: self.controller.show_frame(Register))
         reg_btn.pack(pady=10)
         
     def _check_credentials(self):
@@ -67,10 +70,14 @@ class Login(tk.Frame):
             Checks to see if the credentials match values pulled from the 
             dbcan be found in the database
         """
+        session = self.controller.session
+
         session_user = session.query(user.User)\
                                     .filter_by(
-                                               username=self.username
+                                               username=str(self.username)
                                             ).first() 
+        print str(session_user)
+        """
         if session_user:
             return session_user.check_pwd(), session_user
         else:
@@ -78,7 +85,7 @@ class Login(tk.Frame):
             return False, None
             
         self.controller.show_frame(Login)
-    
+        """
 class Register(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent) 

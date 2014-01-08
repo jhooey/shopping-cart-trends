@@ -30,12 +30,6 @@ if not db_exists:
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-#session_user = login(session)
-#if __name__ == "__main__":
-app = Authorzation(session)
-app.mainloop()
-
-
 
 session_user = User('Jacob', 'Hooey', 'jhooey')
 
@@ -46,6 +40,15 @@ default_store = Store('Metro', '94 montreal road', province)
 
 session.add_all([session_user,default_store])
 session.commit()
+
+
+#session_user = login(session)
+#if __name__ == "__main__":
+app = Authorzation(session)
+app.mainloop()
+
+
+"""
 
 receipt = Receipt(default_store)
 session_user.receipts = [receipt]
@@ -69,3 +72,4 @@ print (str(receipt))
 
 receipt.remove_item(session, receipt_item)
 print (str(receipt))
+"""
