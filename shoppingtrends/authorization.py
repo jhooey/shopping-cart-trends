@@ -37,6 +37,10 @@ class Authorzation(tk.Tk):
 
 
 class Login(tk.Frame):
+    
+    #this variable will be set once a user has successfully logged in
+    session_user = None
+    
     def __init__(self, parent, controller):
         self.controller = controller
         
@@ -57,8 +61,13 @@ class Login(tk.Frame):
         tk.Entry(self, textvariable=self.password).pack()
         
         
-        login_btn = tk.Button(self, text="Login", 
-                            command=self._check_credentials)
+        
+        login_btn = tk.Button(
+                              self, 
+                              text="Login", 
+                              command=self._check_credentials
+                              )
+        
         login_btn.pack(pady=5)
         
         reg_btn = tk.Button(self, text="Registration", 
@@ -67,24 +76,22 @@ class Login(tk.Frame):
         
     def _check_credentials(self):
         """
-            Checks to see if the credentials match values pulled from the 
-            dbcan be found in the database
+        Checks to see if the credentials match values pulled from the db
         """
-        session = self.controller.session
-
-        session_user = session.query(user.User)\
+        self.session_user = self.controller.session.query(user.User)\
                                     .filter_by(
-                                               username=str(self.username)
-                                            ).first() 
-        print str(session_user)
+                                               username=str(
+                                                            self.username.get()
+                                                            )
+                                               ).first() 
+        
+        self.controller.session_user = self.session_user
+        self.quit()
         """
-        if session_user:
-            return session_user.check_pwd(), session_user
+        if self.session_user and self.session_user.check_pwd():
+            pass
         else:
-            print("Sorry we could not find your username")
-            return False, None
-            
-        self.controller.show_frame(Login)
+            self.controller.show_frame(Login)
         """
 class Register(tk.Frame):
     def __init__(self, parent, controller):

@@ -44,10 +44,10 @@ session.commit()
 
 #session_user = login(session)
 #if __name__ == "__main__":
-app = Authorzation(session)
-app.mainloop()
+login = Authorzation(session)
+login.mainloop()
 
-
+print str(login.session_user)
 """
 
 receipt = Receipt(default_store)
