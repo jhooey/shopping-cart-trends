@@ -81,14 +81,15 @@ class Login(tk.Frame):
         Checks to see if the credentials match values pulled from the db
         """
         session_user = self.controller.session.query(user.User)\
-                                .filter_by(username=str(self.username.get()))\
+                                .filter_by(username=self.username.get())\
                                     .first() 
         
         if session_user and session_user.check_pwd(self.password.get()):
             self.controller.session_user = self.session_user
             self.quit()
         else:
-            self.controller.show_frame(Login)
+            self.username.set("")
+            self.password.set("")
 
 
 class Register(tk.Frame):
