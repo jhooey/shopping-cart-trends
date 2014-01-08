@@ -85,7 +85,7 @@ class Login(tk.Frame):
                                     .first() 
         
         if session_user and session_user.check_pwd(self.password.get()):
-            self.controller.session_user = self.session_user
+            self.controller.session_user = session_user
             self.quit()
         else:
             self.username.set("")
