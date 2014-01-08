@@ -1,5 +1,6 @@
 from globalmethods import ask_yes_no_question
 import Tkinter as tk
+import tkFont
 import user
 
 TITLE_FONT = ("Helvetica", 18, "bold")
@@ -60,6 +61,15 @@ class Login(tk.Frame):
         self.password = tk.StringVar()
         tk.Entry(self, textvariable=self.password).pack()
         
+        self.error_message = tk.StringVar()
+        self.error_message.set("")
+        
+        label_error_message = tk.Label(
+                                       self, 
+                                       textvariable = self.error_message, 
+                                       fg="red"
+                                       )
+        label_error_message.pack()
         
         
         login_btn = tk.Button(
@@ -90,6 +100,7 @@ class Login(tk.Frame):
         else:
             self.username.set("")
             self.password.set("")
+            self.error_message.set("Incorrect username or password")
 
 
 class Register(tk.Frame):
