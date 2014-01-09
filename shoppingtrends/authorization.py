@@ -188,7 +188,14 @@ class Register(tk.Frame):
         register_button.grid(row=7, column=1, padx=10, pady=10)
         
     def _register(self):
-        pass
+        self.reset_form()
+    
+    def reset_form(self):
+        self.first_name.set("")
+        self.last_name.set("")
+        self.username.set("")
+        self.password.set("")
+        self.confirm_pwd.set("")
     
 def create_user(session):
     """Gathers the info necessary to create a new user"""
