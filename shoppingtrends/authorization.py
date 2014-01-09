@@ -22,7 +22,7 @@ class Authorzation(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (Login, Register):
+        for F in (Login, Register, Success):
             frame = F(container, self)
             self.frames[F] = frame
             # put all of the pages in the same location; 
@@ -114,6 +114,7 @@ class Login(tk.Frame):
 
 
 class Register(tk.Frame):
+    
     def __init__(self, parent, controller):
         self.controller = controller
         tk.Frame.__init__(self, parent) 
@@ -222,8 +223,6 @@ class Register(tk.Frame):
             self.confirm_pwd.set("")
             self.error_message.set("Your passwords don't match!")
             return
-            
-        print("Awesome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         
         self.controller.session.add(user.User(
                                          self.first_name.get(),
@@ -233,7 +232,7 @@ class Register(tk.Frame):
                                          ))
         self.controller.session.commit()
         
-        self.controller.show_frame(Login)
+        self.controller.show_frame(Success)
         
             
     def reset_form(self):
@@ -243,14 +242,26 @@ class Register(tk.Frame):
         self.password.set("")
         self.confirm_pwd.set("")
     
-def create_user(session):
-    """Gathers the info necessary to create a new user"""
-    print("What's your first name?")
-    first_name = raw_input('> ')
-    print("What's your last name?")
-    last_name = raw_input('> ')
-    print("What do you want as your username?")
-    username = raw_input('> ')
+class Success(tk.Frame):
     
-    session.add(user.User(first_name, last_name, username))
-    session.commit()
+    def __init__(self, parent, controller):
+        self.controller = controller
+        tk.Frame.__init__(self, parent) 
+        label = ttk.Label(
+                          self, 
+                          text="You have successfully registered", 
+                          font=TITLE_FONT
+                          )
+        label.grid(row=0, pady=10)
+    
+        #Create the First name field
+        self.message = ttk.Label(
+                                 self, 
+                                 text='You now must go back and login to ' \
+                                    'access the application'
+                                 )
+        self.message.grid(row=1)
+        
+        return_button = ttk.Button(self, text="Back to Login", 
+                           command=lambda: self.controller.show_frame(Login))
+        return_button.grid(row=7, column=0, padx=10, pady=10)
