@@ -106,38 +106,58 @@ class Login(tk.Frame):
 class Register(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent) 
-        label = tk.Label(self, text="This is page 1", font=TITLE_FONT)
-        label.pack(side="top", fill="x", pady=10)
+        label = tk.Label(self, text="Registration", font=TITLE_FONT)
+        label.grid(row=0, columnspan=2, pady=10)
     
         #Create the First name field
         self.label_first_name = tk.Label(self, text="Enter your first name")
-        self.label_first_name.pack()
+        self.label_first_name.grid(row=1, column=0, padx=(15, 0), sticky='W')
         self.first_name = tk.StringVar()
-        tk.Entry(self, textvariable=self.first_name).pack()
+        tk.Entry(self, textvariable=self.first_name).grid(
+                                                          row=1, 
+                                                          column=1, 
+                                                          padx=(0,15)
+                                                          )
         
         #Create the Last name field
         self.label_last_name = tk.Label(self, text="Enter your last name")
-        self.label_last_name.pack()
+        self.label_last_name.grid(row=2, column=0, padx=(15, 0), sticky='W')
         self.last_name = tk.StringVar()
-        tk.Entry(self, textvariable=self.last_name).pack()
+        tk.Entry(self, textvariable=self.last_name).grid(
+                                                         row=2, 
+                                                         column=1, 
+                                                         padx=(0,15)
+                                                         )
     
         #Create the Username field
         self.label_username = tk.Label(self, text="Enter a desired username")
-        self.label_username.pack()
+        self.label_username.grid(row=3, column=0, padx=(15, 0), sticky='W')
         self.username = tk.StringVar()
-        tk.Entry(self, textvariable=self.username).pack()
+        tk.Entry(self, textvariable=self.username).grid(
+                                                        row=3, 
+                                                        column=1, 
+                                                        padx=(0,15)
+                                                        )
         
         #Create the password field
         self.label_password = tk.Label(self, text="Enter a password")
-        self.label_password.pack()
+        self.label_password.grid(row=4, column=0, padx=(15, 0), sticky='W')
         self.password = tk.StringVar()
-        tk.Entry(self, textvariable=self.password).pack()
+        tk.Entry(self, textvariable=self.password).grid(
+                                                        row=4, 
+                                                        column=1, 
+                                                        padx=(0,15)
+                                                        )
         
         #Create the confirm password field
         self.label_confirm_pwd = tk.Label(self, text="confirm password")
-        self.label_confirm_pwd.pack()
+        self.label_confirm_pwd.grid(row=5, column=0, padx=(15, 0), sticky='W')
         self.confirm_pwd = tk.StringVar()
-        tk.Entry(self, textvariable=self.confirm_pwd).pack()
+        tk.Entry(self, textvariable=self.confirm_pwd).grid(
+                                                           row=5, 
+                                                           column=1, 
+                                                           padx=(0,15)
+                                                           )
         
         self.error_message = tk.StringVar()
         self.error_message.set("")
@@ -147,12 +167,19 @@ class Register(tk.Frame):
                                             textvariable = self.error_message, 
                                             fg="red"
                                             )
-        self.label_error_message.pack()
+        self.label_error_message.grid(row=6, columnspan=2)
         
         
-        button = tk.Button(self, text="Back to Login", 
+        return_button = tk.Button(self, text="Back to Login", 
                            command=lambda: controller.show_frame(Login))
-        button.pack(pady=10)
+        return_button.grid(row=7, column=0, padx=10, pady=10)
+        
+        register_button = tk.Button(self, text="Register", 
+                           command=self._register)
+        register_button.grid(row=7, column=1, padx=10, pady=10)
+        
+    def _register(self):
+        pass
     
 def create_user(session):
     """Gathers the info necessary to create a new user"""
