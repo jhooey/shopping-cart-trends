@@ -49,6 +49,7 @@ class Login(tk.Frame):
         
         self.configure(background=BG_COLOR)
         
+        
         label = ttk.Label(
                           self, 
                           text="Shopping Cart Trends", 
@@ -160,7 +161,7 @@ class Register(tk.Frame):
                                                         )
         
         #Create the confirm password field
-        self.label_confirm_pwd = ttk.Label(self, text="confirm password")
+        self.label_confirm_pwd = ttk.Label(self, text="Confirm password")
         self.label_confirm_pwd.grid(row=5, column=0, padx=(15, 0), sticky='W')
         self.confirm_pwd = tk.StringVar()
         tk.Entry(self, textvariable=self.confirm_pwd).grid(
@@ -181,7 +182,7 @@ class Register(tk.Frame):
         
         
         return_button = ttk.Button(self, text="Back to Login", 
-                           command=lambda: controller.show_frame(Login))
+                           command=lambda: self.controller.show_frame(Login))
         return_button.grid(row=7, column=0, padx=10, pady=10)
         
         register_button = ttk.Button(self, text="Register", 
@@ -223,6 +224,17 @@ class Register(tk.Frame):
             return
             
         print("Awesome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        
+        self.controller.session.add(user.User(
+                                         self.first_name.get(),
+                                         self.last_name.get(),
+                                         self.username.get(),
+                                         self.password.get()
+                                         ))
+        self.controller.session.commit()
+        
+        self.controller.show_frame(Login)
+        
             
     def reset_form(self):
         self.first_name.set("")

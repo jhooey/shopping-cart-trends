@@ -51,8 +51,6 @@ try:
     print str(login.session_user)
 except: 
     quit()
-
-print "test"
 """
 
 receipt = Receipt(default_store)
