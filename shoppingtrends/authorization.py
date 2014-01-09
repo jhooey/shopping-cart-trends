@@ -114,6 +114,7 @@ class Login(tk.Frame):
 
 class Register(tk.Frame):
     def __init__(self, parent, controller):
+        self.controller = controller
         tk.Frame.__init__(self, parent) 
         label = ttk.Label(self, text="Registration", font=TITLE_FONT)
         label.grid(row=0, columnspan=2, pady=10)
@@ -188,8 +189,41 @@ class Register(tk.Frame):
         register_button.grid(row=7, column=1, padx=10, pady=10)
         
     def _register(self):
-        self.reset_form()
-    
+        
+        if not self.first_name.get() or len(self.first_name.get()) > 50:
+            self.error_message\
+                    .set("You must enter your first name (max 50 chars).")
+            return
+        elif not self.last_name.get() or len(self.last_name.get()) > 50:
+            self.error_message\
+                    .set("You must enter your last name (max 50 chars).")
+            return
+        elif not self.username.get() or len(self.username.get()) > 50:
+            self.error_message.set("You must enter a username (max 50 chars).")
+            return
+        elif not self.password.get():
+            self.error_message.set("You must enter a password")
+            return
+        elif not self.confirm_pwd.get():
+            self.error_message.set("You must confirm your password")
+            return
+            
+        existing_user = self.controller.session.query(user.User)\
+                            .filter_by(username=self.username.get().lower())\
+                             .first()
+        
+        if existing_user:
+            self.error_message.set("Sorry, that username already exists")
+            return
+        
+        if self.password.get() != self.confirm_pwd.get():
+            self.password.set("")
+            self.confirm_pwd.set("")
+            self.error_message.set("Your passwords don't match!")
+            return
+            
+        print("Awesome!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            
     def reset_form(self):
         self.first_name.set("")
         self.last_name.set("")
