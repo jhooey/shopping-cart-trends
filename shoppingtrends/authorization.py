@@ -49,26 +49,33 @@ class Login(tk.Frame):
         
         self.configure(background=BG_COLOR)
         
-        
         label = ttk.Label(
                           self, 
                           text="Shopping Cart Trends", 
                           font=TITLE_FONT, 
                           background=BG_COLOR
                           )
-        label.pack(side="top", fill="x", pady=10)
+        label.grid(row=0, columnspan=2)
         
         #Create the Username field
         label_username = ttk.Label(self, text="username", background=BG_COLOR)
-        label_username.pack()
+        label_username.grid(row=1, column=0, padx=(15, 0), sticky='W')
         self.username = tk.StringVar()
-        tk.Entry(self, textvariable=self.username).pack()
+        tk.Entry(self, textvariable=self.username).grid(
+                                                      row=1, 
+                                                      column=1, 
+                                                      padx=(0,15)
+                                                      )
         
         #Create the password field
         label_password = ttk.Label(self, text="password", background=BG_COLOR)
-        label_password.pack()
+        label_password.grid(row=2, column=0, padx=(15, 0), sticky='W')
         self.password = tk.StringVar()
-        tk.Entry(self, textvariable=self.password).pack()
+        tk.Entry(self, textvariable=self.password).grid(
+                                                      row=2, 
+                                                      column=1, 
+                                                      padx=(0,15)
+                                                      )
         
         self.error_message = tk.StringVar()
         self.error_message.set("")
@@ -79,7 +86,7 @@ class Login(tk.Frame):
                                        foreground="red",
                                        background=BG_COLOR
                                        )
-        label_error_message.pack()
+        label_error_message.grid(row=3, columnspan=2)
         
         
         login_btn = ttk.Button(
@@ -87,14 +94,14 @@ class Login(tk.Frame):
                               text="Login", 
                               command=self._check_credentials
                               )
-        login_btn.pack(pady=5)
+        login_btn.grid(row=4, column=1, padx=10, pady=10)
         
         reg_btn = ttk.Button(
                             self, 
                             text="Registration", 
                             command=lambda:self.controller.show_frame(Register)
                             )
-        reg_btn.pack(pady=10)
+        reg_btn.grid(row=4, column=0, padx=10, pady=10)
         
     def _check_credentials(self):
         """
@@ -249,7 +256,7 @@ class Success(tk.Frame):
         tk.Frame.__init__(self, parent) 
         label = ttk.Label(
                           self, 
-                          text="You have successfully registered", 
+                          text="Registration Successful", 
                           font=TITLE_FONT
                           )
         label.grid(row=0, pady=10)
