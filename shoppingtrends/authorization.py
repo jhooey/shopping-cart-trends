@@ -4,6 +4,7 @@ import ttk
 import user
 
 TITLE_FONT = ("Helvetica", 18, "bold")
+BG_COLOR = "alice blue"
 
 class Authorzation(tk.Tk):
     def __init__(self, session, *args, **kwargs):
@@ -44,19 +45,26 @@ class Login(tk.Frame):
     
     def __init__(self, parent, controller):
         self.controller = controller
-        
         tk.Frame.__init__(self, parent) 
-        label = ttk.Label(self, text="Shopping Cart Trends", font=TITLE_FONT)
+        
+        self.configure(background=BG_COLOR)
+        
+        label = ttk.Label(
+                          self, 
+                          text="Shopping Cart Trends", 
+                          font=TITLE_FONT, 
+                          background=BG_COLOR
+                          )
         label.pack(side="top", fill="x", pady=10)
         
         #Create the Username field
-        label_username = ttk.Label(self, text="username")
+        label_username = ttk.Label(self, text="username", background=BG_COLOR)
         label_username.pack()
         self.username = tk.StringVar()
         tk.Entry(self, textvariable=self.username).pack()
         
         #Create the password field
-        label_password = ttk.Label(self, text="password")
+        label_password = ttk.Label(self, text="password", background=BG_COLOR)
         label_password.pack()
         self.password = tk.StringVar()
         tk.Entry(self, textvariable=self.password).pack()
@@ -67,7 +75,8 @@ class Login(tk.Frame):
         label_error_message = ttk.Label(
                                        self, 
                                        textvariable = self.error_message, 
-                                       foreground="red"
+                                       foreground="red",
+                                       background=BG_COLOR
                                        )
         label_error_message.pack()
         
