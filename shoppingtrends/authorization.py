@@ -108,9 +108,51 @@ class Register(tk.Frame):
         tk.Frame.__init__(self, parent) 
         label = tk.Label(self, text="This is page 1", font=TITLE_FONT)
         label.pack(side="top", fill="x", pady=10)
-        button = tk.Button(self, text="Go to the start page", 
+    
+        #Create the First name field
+        self.label_first_name = tk.Label(self, text="Enter your first name")
+        self.label_first_name.pack()
+        self.first_name = tk.StringVar()
+        tk.Entry(self, textvariable=self.first_name).pack()
+        
+        #Create the Last name field
+        self.label_last_name = tk.Label(self, text="Enter your last name")
+        self.label_last_name.pack()
+        self.last_name = tk.StringVar()
+        tk.Entry(self, textvariable=self.last_name).pack()
+    
+        #Create the Username field
+        self.label_username = tk.Label(self, text="Enter a desired username")
+        self.label_username.pack()
+        self.username = tk.StringVar()
+        tk.Entry(self, textvariable=self.username).pack()
+        
+        #Create the password field
+        self.label_password = tk.Label(self, text="Enter a password")
+        self.label_password.pack()
+        self.password = tk.StringVar()
+        tk.Entry(self, textvariable=self.password).pack()
+        
+        #Create the confirm password field
+        self.label_confirm_pwd = tk.Label(self, text="confirm password")
+        self.label_confirm_pwd.pack()
+        self.confirm_pwd = tk.StringVar()
+        tk.Entry(self, textvariable=self.confirm_pwd).pack()
+        
+        self.error_message = tk.StringVar()
+        self.error_message.set("")
+    
+        self.label_error_message = tk.Label(
+                                            self, 
+                                            textvariable = self.error_message, 
+                                            fg="red"
+                                            )
+        self.label_error_message.pack()
+        
+        
+        button = tk.Button(self, text="Back to Login", 
                            command=lambda: controller.show_frame(Login))
-        button.pack()
+        button.pack(pady=10)
     
 def create_user(session):
     """Gathers the info necessary to create a new user"""

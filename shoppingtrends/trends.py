@@ -35,7 +35,7 @@ session_user = User('Jacob', 'Hooey', 'jhooey', 'p')
 
 province = session.query(Province).\
                         filter(Province.abbreviation == 'QC').first() 
-                        
+
 default_store = Store('Metro', '94 montreal road', province)
 
 session.add_all([session_user,default_store])
@@ -51,7 +51,7 @@ try:
     print str(login.session_user)
 except: 
     quit()
-    
+
 print "test"
 """
 
