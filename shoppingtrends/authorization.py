@@ -91,8 +91,8 @@ class Login(tk.Frame):
         Checks to see if the credentials match values pulled from the db
         """
         session_user = self.controller.session.query(user.User)\
-                                .filter_by(username=self.username.get())\
-                                    .first() 
+                            .filter_by(username=self.username.get().lower())\
+                             .first() 
         
         if session_user and session_user.check_pwd(self.password.get()):
             self.controller.session_user = session_user
