@@ -60,7 +60,7 @@ class Login(tk.Frame):
                           )
         label.grid(row=0, columnspan=2)
         
-        #Create the Username field
+        #Username field
         label_username = ttk.Label(self, text="username")
         label_username.grid(row=1, column=0, padx=(15, 0), sticky='W')
         self.username = tk.StringVar()
@@ -70,7 +70,7 @@ class Login(tk.Frame):
                                                       padx=(0,15)
                                                       )
         
-        #Create the password field
+        #password field
         label_password = ttk.Label(self, text="password")
         label_password.grid(row=2, column=0, padx=(15, 0), sticky='W')
         self.password = tk.StringVar()
@@ -131,6 +131,8 @@ class Register(tk.Frame):
     def __init__(self, parent, controller):
         self.controller = controller
         tk.Frame.__init__(self, parent) 
+        
+        #Main page title
         label = ttk.Label(self, text="Registration", font=TITLE_FONT)
         label.grid(row=0, columnspan=2, pady=10)
     
@@ -183,7 +185,7 @@ class Register(tk.Frame):
                                                            column=1, 
                                                            padx=(0,15)
                                                            )
-        
+        #Messages
         self.error_message = tk.StringVar()
         self.error_message.set("")
     
@@ -195,6 +197,7 @@ class Register(tk.Frame):
         self.label_error_message.grid(row=6, columnspan=2)
         
         
+        #Buttons
         return_button = ttk.Button(self, text="Back to Login", 
                            command=lambda: self.controller.show_frame(Login))
         return_button.grid(row=7, column=0, padx=10, pady=10)
@@ -254,6 +257,7 @@ class Register(tk.Frame):
         
             
     def reset_form(self):
+        """Sets all the fields to empty strings"""
         self.first_name.set("")
         self.last_name.set("")
         self.username.set("")
