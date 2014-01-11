@@ -6,6 +6,8 @@ import user
 TITLE_FONT = ("Helvetica", 18, "bold")
 
 class Authorzation(tk.Tk):
+    """Container for all the windows related to the login process"""
+    
     def __init__(self, session, *args, **kwargs):
         
         self.session = session
@@ -32,13 +34,18 @@ class Authorzation(tk.Tk):
         self.show_frame(Login)
 
     def show_frame(self, c):
-        '''Show a frame for the given class'''
+        """Show a frame for the given class"""
         frame = self.frames[c]
         frame.tkraise()
 
 
 class Login(tk.Frame):
-    
+    """
+    GUI that allows the user to enter their username and password 
+    so that they can continue to the main application. 
+    If they have never registered there is a button that will direct
+    them to the appropriate page.
+    """
     #this variable will be set once a user has successfully logged in
     session_user = None
     
@@ -116,6 +123,10 @@ class Login(tk.Frame):
 
 
 class Register(tk.Frame):
+    """
+    GUI that collects all the necessary information from the user to
+    create them a "User" object that is stored in the db
+    """
     
     def __init__(self, parent, controller):
         self.controller = controller
@@ -193,7 +204,11 @@ class Register(tk.Frame):
         register_button.grid(row=7, column=1, padx=10, pady=10)
         
     def _register(self):
+        """
+        Checks all the conditions that are required for registration
+        """
         
+        #Every field must contain some information
         if not self.first_name.get() or len(self.first_name.get()) > 50:
             self.error_message\
                     .set("You must enter your first name (max 50 chars).")
@@ -211,15 +226,16 @@ class Register(tk.Frame):
         elif not self.confirm_pwd.get():
             self.error_message.set("You must confirm your password")
             return
-            
+        
+        #Checks if someone is already registered with that username
         existing_user = self.controller.session.query(user.User)\
                             .filter_by(username=self.username.get().lower())\
                              .first()
-        
         if existing_user:
             self.error_message.set("Sorry, that username already exists")
             return
         
+        #Make sure the user has entered their password correctly
         if self.password.get() != self.confirm_pwd.get():
             self.password.set("")
             self.confirm_pwd.set("")
@@ -245,7 +261,10 @@ class Register(tk.Frame):
         self.confirm_pwd.set("")
     
 class Success(tk.Frame):
-    
+    """
+    Provides the user visual feedback when they have successfully 
+    registered
+    """
     def __init__(self, parent, controller):
         self.controller = controller
         tk.Frame.__init__(self, parent) 
@@ -256,7 +275,6 @@ class Success(tk.Frame):
                           )
         label.grid(row=0, pady=10)
     
-        #Create the First name field
         self.message = ttk.Label(
                                  self, 
                                  text='You now must go back and login to ' \
