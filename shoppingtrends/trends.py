@@ -16,7 +16,7 @@ from user import User
 from localization import Province, Store
 from receipt import Receipt, Category, Item, ReceiptItem
 
-
+"""MAIN APPLICATION - PART 1"""
 db_exists = os.path.isfile('test.db')
 
 db = 'sqlite:///:memory:'
@@ -26,11 +26,13 @@ session = db_init(db)
 
 if not db_exists:
     populate_all_tables(session)
+"""END OF MAIN APPLICATION"""
+
 
 print("Welcome! Shall we dive in and judge your spending habits?")
 print("We can start by figuring out who's here.")
 
-
+"""INITIALIZING TEST DATA"""
 session_user = User('Jacob', 'Hooey', 'jhooey', 'p')
 
 province = session.query(Province).\
@@ -40,10 +42,9 @@ default_store = Store('Metro', '94 montreal road', province)
 
 session.add_all([session_user,default_store])
 session.commit()
+"""TEST DATA INITIALIZED"""
 
-
-#session_user = login(session)
-#if __name__ == "__main__":
+"""MAIN APPLICATION - PART 2"""
 login = Authorzation(session)
 login.mainloop()
 
@@ -51,7 +52,9 @@ try:
     print str(login.session_user)
 except: 
     quit()
-"""
+"""END OF MAIN APPLICATION"""
+
+"""TESTING FUNCTIONS
 
 receipt = Receipt(default_store)
 session_user.receipts = [receipt]
