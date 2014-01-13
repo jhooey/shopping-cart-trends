@@ -74,7 +74,7 @@ class Login(tk.Frame):
         label_password = ttk.Label(self, text="password")
         label_password.grid(row=2, column=0, padx=(15, 0), sticky='W')
         self.password = tk.StringVar()
-        tk.Entry(self, textvariable=self.password).grid(
+        tk.Entry(self, show="*", textvariable=self.password).grid(
                                                       row=2, 
                                                       column=1, 
                                                       padx=(0,15)
@@ -170,7 +170,7 @@ class Register(tk.Frame):
         self.label_password = ttk.Label(self, text="Enter a password")
         self.label_password.grid(row=4, column=0, padx=(15, 0), sticky='W')
         self.password = tk.StringVar()
-        tk.Entry(self, textvariable=self.password).grid(
+        tk.Entry(self, show="*", textvariable=self.password).grid(
                                                         row=4, 
                                                         column=1, 
                                                         padx=(0,15)
@@ -180,7 +180,7 @@ class Register(tk.Frame):
         self.label_confirm_pwd = ttk.Label(self, text="Confirm password")
         self.label_confirm_pwd.grid(row=5, column=0, padx=(15, 0), sticky='W')
         self.confirm_pwd = tk.StringVar()
-        tk.Entry(self, textvariable=self.confirm_pwd).grid(
+        tk.Entry(self, show="*", textvariable=self.confirm_pwd).grid(
                                                            row=5, 
                                                            column=1, 
                                                            padx=(0,15)
