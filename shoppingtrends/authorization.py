@@ -1,4 +1,3 @@
-from globalmethods import ask_yes_no_question
 import Tkinter as tk
 import ttk
 import user
