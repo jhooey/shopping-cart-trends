@@ -1,9 +1,5 @@
 """
-The Main Program
-
-This is the file that will be run when the application is started. 
-Its function is to connect all the pieces of the application so that we 
-end up with a useful piece of software.
+Test file
 """
 
 import os.path

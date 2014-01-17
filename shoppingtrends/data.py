@@ -1,4 +1,5 @@
 from localization import Province, Country
+from receipt import Receipt
 
 def populate_all_tables(session):
     populate_provinces_tbl(session)
