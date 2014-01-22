@@ -23,8 +23,10 @@ if not db_exists:
 
 login = Authorzation(session)
 login.mainloop()
+session_user = login.session_user
+login.destroy()
 
 try:
-    print str(login.session_user)
+    print str(session_user)
 except: 
     quit()
