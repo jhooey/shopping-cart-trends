@@ -2,7 +2,6 @@ import Tkinter as tk
 import ttk
 import user
 
-
 class Root(tk.Tk):
     """Container for all frames within the application"""
     
@@ -11,9 +10,13 @@ class Root(tk.Tk):
         
         #initialize menu
         self.config(menu=MenuBar(self))
-        status = StatusBar(self)
-        status.pack(side='bottom', fill='x')
-
+        
+        self.appFrame = Application(self)
+        self.appFrame.pack(side='top', fill='both', expand='True')
+        
+        self.status = StatusBar(self)
+        self.status.pack(side='bottom', fill='x')
+        
 class MenuBar(tk.Menu):
     def __init__(self, parent):
         tk.Menu.__init__(self, parent)
@@ -50,9 +53,21 @@ class StatusBar(ttk.Frame):
         self.label.update_idletasks()
 
             
-class Application:
+class Application(ttk.Notebook):
     def __init__(self, root):
-        pass
+        ttk.Notebook.__init__(self, root)
+        
+        dashboard = ttk.Frame(self)
+        receipts = ttk.Frame(self)
+        stores = ttk.Frame(self)
+        categories = ttk.Frame(self)
+        add_Receipt = ttk.Frame(self)
+        
+        self.add(dashboard, text = "Dashboard")
+        self.add(receipts, text = "My Receipts")
+        self.add(stores, text = "Stores")
+        self.add(categories, text = "Categories")
+        self.add(add_Receipt, text = "Add Receipt")
 
 root = Root()
 root.mainloop()
