@@ -17,6 +17,10 @@ class Root(tk.Tk):
         self.status = StatusBar(self)
         self.status.pack(side='bottom', fill='x')
         
+        
+        
+        
+        
 class MenuBar(tk.Menu):
     def __init__(self, parent):
         tk.Menu.__init__(self, parent)
@@ -55,13 +59,14 @@ class StatusBar(ttk.Frame):
             
 class Application(ttk.Notebook):
     def __init__(self, root):
-        ttk.Notebook.__init__(self, root)
+        ttk.Notebook.__init__(self, root, width=200, height=200)
         
         dashboard = ttk.Frame(self)
         receipts = ttk.Frame(self)
         stores = ttk.Frame(self)
         categories = ttk.Frame(self)
         add_Receipt = ttk.Frame(self)
+        
         
         self.add(dashboard, text = "Dashboard")
         self.add(receipts, text = "My Receipts")
