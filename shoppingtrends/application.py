@@ -11,7 +11,8 @@ class Root(tk.Tk):
         
         #initialize menu
         self.config(menu=MenuBar(self))
-        
+        status = StatusBar(self)
+        status.pack(side='bottom', fill='x')
 
 class MenuBar(tk.Menu):
     def __init__(self, parent):
@@ -33,7 +34,20 @@ class MenuBar(tk.Menu):
     def callback(self):
         print "called the callback!"
 
+class StatusBar(ttk.Frame):
 
+    def __init__(self, master):
+        ttk.Frame.__init__(self, master)
+        self.label = ttk.Label(self, relief='sunken', anchor='w')
+        self.label.pack(fill='x')
+
+    def set(self, format, *args):
+        self.label.config(text=format % args)
+        self.label.update_idletasks()
+
+    def clear(self):
+        self.label.config(text="")
+        self.label.update_idletasks()
 
             
 class Application:
