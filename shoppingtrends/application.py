@@ -8,6 +8,9 @@ class Root(tk.Tk):
     def __init__(self, session_user, session, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         
+        self.session_user = session_user
+        self.session = session
+        
         self.iconbitmap(default='./img/shopping_basket.ico')
         self.wm_title("Shopping Cart Trends")
         
@@ -61,10 +64,12 @@ class MenuBar(tk.Menu):
 
 class StatusBar(ttk.Frame):
     """Will eventually contain relevant information for the user"""
-    def __init__(self, master):
-        ttk.Frame.__init__(self, master)
+    def __init__(self, root):
+        ttk.Frame.__init__(self, root)
         self.label = ttk.Label(self, relief='sunken', anchor='w')
         self.label.pack(fill='x')
+        
+        self.set("%s", "Logged in User: " + str(root.session_user))
 
     def set(self, format, *args):
         self.label.config(text=format % args)
