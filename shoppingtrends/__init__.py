@@ -14,7 +14,7 @@ from authorization import Authorzation
 db_exists = os.path.isfile('test.db')
 
 db = 'sqlite:///:memory:'
-#db = 'sqlite:///test.db'
+db = 'sqlite:///test.db'
 
 session = db_init(db)
 
@@ -23,10 +23,9 @@ if not db_exists:
 
 login = Authorzation(session)
 login.mainloop()
-session_user = login.session_user
-login.destroy()
 
 try:
-    print str(session_user)
+    session_user = login.session_user
+    login.destroy()
 except: 
     quit()

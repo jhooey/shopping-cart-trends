@@ -1,4 +1,4 @@
-from localization import Province, Country
+from localization import Province, Country, Store
 from receipt import Receipt
 
 def populate_all_tables(session):
@@ -6,6 +6,9 @@ def populate_all_tables(session):
 
 def populate_provinces_tbl(session):
     canada = Country("CAN", "Canada")
+    
+    ontario = Province('Ontario','ON', 13)
+    quebec = Province('Quebec','QC', 14.975)
     
     canada.provinces = [Province('Alberta','AB', 5),
                      Province('British Columbia','BC', 12),
@@ -15,11 +18,18 @@ def populate_provinces_tbl(session):
                      Province('Northwest Territories','NT', 5),
                      Province('Nova Scotia','NS', 15),
                      Province('Nunavut','NU', 5),
-                     Province('Ontario','ON', 13),
+                     ontario,
                      Province('Prince Edward Island','PE', 14),
-                     Province('Quebec','QC', 14.975),
+                     quebec,
                      Province('Saskatchewan','SK', 10),
                      Province('Yukon','YT', 5)
                      ]
     session.add(canada)
+    
+    session.add_all([Store("Loblaws", "Rideau and Nelson", ontario),
+                     Store("Maxi", "Hull St. Joseph", quebec),
+                     Store("Herb and Spice Shop", "375 Bank Street", ontario)]
+                    )
+
     session.commit()
+
