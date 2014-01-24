@@ -16,7 +16,7 @@ from user import User
 db_exists = os.path.isfile('test.db')
 
 db = 'sqlite:///:memory:'
-db = 'sqlite:///test.db'
+#db = 'sqlite:///test.db'
 
 session = db_init(db)
 
