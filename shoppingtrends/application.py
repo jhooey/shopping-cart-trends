@@ -8,6 +8,7 @@ class Root(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         
         self.iconbitmap(default='./img/shopping_basket.ico')
+        self.wm_title("Shopping Cart Trends")
         
         #initialize menu
         self.config(menu=MenuBar(self))
