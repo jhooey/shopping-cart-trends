@@ -1,11 +1,10 @@
 import Tkinter as tk
 import ttk
-import user
 
 class Root(tk.Tk):
     """Container for all frames within the application"""
     
-    def __init__(self, *args, **kwargs):
+    def __init__(self, session_user, session, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         
         #initialize menu

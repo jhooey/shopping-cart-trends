@@ -30,7 +30,7 @@ if not db_exists:
 session_user = session.query(User)\
                             .filter_by(username='jhooey')\
                              .first()
-root = Root()
+root = Root(session_user, session)
 root.mainloop()
 
 try:
