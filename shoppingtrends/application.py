@@ -1,4 +1,5 @@
 import Tkinter as tk
+import tkMessageBox
 import ttk
 
 class Root(tk.Tk):
@@ -46,11 +47,17 @@ class MenuBar(tk.Menu):
         #All the options under the HELP header
         helpmenu = tk.Menu(self, tearoff=False)
         self.add_cascade(label="Help", menu=helpmenu)
-        helpmenu.add_command(label="About...", command=self.callback)
-    
-    def callback(self):
-        """Place holder function"""
-        print "called the callback!"
+        helpmenu.add_command(
+                             label="About...", 
+                             command=lambda: tkMessageBox.showinfo(
+                                                "About Us", 
+                                                "Shopping Cart Trends \n" +
+                                                "Author: Jacob Hooey\n" +
+                                                "Version: 0.3\n" +
+                                                "(c) Jacob Hooey 2014\n" +
+                                                "www.jacobhooey.com" 
+                                                )
+                             )
 
 class StatusBar(ttk.Frame):
     """Will eventually contain relevant information for the user"""
