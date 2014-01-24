@@ -7,6 +7,8 @@ class Root(tk.Tk):
     def __init__(self, session_user, session, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         
+        self.iconbitmap(default='./img/shopping_basket.ico')
+        
         #initialize menu
         self.config(menu=MenuBar(self))
         
