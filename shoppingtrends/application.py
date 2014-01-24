@@ -17,17 +17,18 @@ class Root(tk.Tk):
         self.status = StatusBar(self)
         self.status.pack(side='bottom', fill='x')
         
-        
-        
-        
-        
 class MenuBar(tk.Menu):
-    def __init__(self, parent):
-        tk.Menu.__init__(self, parent)
+    def __init__(self, root):
+        tk.Menu.__init__(self, root)
+
+        self.root = root
 
         filemenu = tk.Menu(self, tearoff=False)
         self.add_cascade(label="File",underline=0, menu=filemenu)
-        filemenu.add_command(label="New", command=self.callback)
+        filemenu.add_command(
+                             label="New Receipt", 
+                             command=self.select_add_receipt
+                             )
         filemenu.add_separator()
         filemenu.add_command(label="Exit", underline=1, command=self.quit)
 
@@ -40,6 +41,9 @@ class MenuBar(tk.Menu):
     
     def callback(self):
         print "called the callback!"
+        
+    def select_add_receipt(self):
+        self.root.appFrame.select(self.root.appFrame.add_Receipt)
 
 class StatusBar(ttk.Frame):
 
@@ -61,18 +65,22 @@ class Application(ttk.Notebook):
     def __init__(self, root):
         ttk.Notebook.__init__(self, root, width=200, height=200)
         
-        dashboard = ttk.Frame(self)
-        receipts = ttk.Frame(self)
-        stores = ttk.Frame(self)
-        categories = ttk.Frame(self)
-        add_Receipt = ttk.Frame(self)
+        self.dashboard = ttk.Frame(self)
+        self.receipts = ttk.Frame(self)
+        self.stores = ttk.Frame(self)
+        self.categories = ttk.Frame(self)
+        self.add_Receipt = ttk.Frame(self)
         
         
-        self.add(dashboard, text = "Dashboard")
-        self.add(receipts, text = "My Receipts")
-        self.add(stores, text = "Stores")
-        self.add(categories, text = "Categories")
-        self.add(add_Receipt, text = "Add Receipt")
+        self.add(self.dashboard, text = "Dashboard")
+        self.add(self.receipts, text = "My Receipts")
+        self.add(self.stores, text = "Stores")
+        self.add(self.categories, text = "Categories")
+        self.add(self.add_Receipt, text = "Add Receipt")
 
+class Dashboard(tk.Canvas):
+    def __init__(self):
+        pass
+    
 root = Root()
 root.mainloop()
