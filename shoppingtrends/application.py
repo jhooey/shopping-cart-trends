@@ -29,7 +29,7 @@ class MenuBar(tk.Menu):
         self.add_cascade(label="File",underline=0, menu=filemenu)
         filemenu.add_command(
                              label="New Receipt", 
-                             command=self.select_add_receipt
+                             command= lambda: self.root.appFrame.select(self.root.appFrame.add_Receipt)
                              )
         filemenu.add_separator()
         filemenu.add_command(label="Exit", underline=1, command=self.quit)
@@ -43,9 +43,6 @@ class MenuBar(tk.Menu):
     
     def callback(self):
         print "called the callback!"
-        
-    def select_add_receipt(self):
-        self.root.appFrame.select(self.root.appFrame.add_Receipt)
 
 class StatusBar(ttk.Frame):
 
