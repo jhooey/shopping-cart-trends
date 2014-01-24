@@ -10,9 +10,8 @@ class Root(tk.Tk):
         self.iconbitmap(default='./img/shopping_basket.ico')
         self.wm_title("Shopping Cart Trends")
         
-        #initialize menu
         self.config(menu=MenuBar(self))
-        
+
         self.appFrame = Application(self)
         self.appFrame.pack(side='top', fill='both', expand='True')
         
@@ -20,32 +19,41 @@ class Root(tk.Tk):
         self.status.pack(side='bottom', fill='x')
         
 class MenuBar(tk.Menu):
+    """
+    Contains all the options that are available to the user at all times
+    """
     def __init__(self, root):
         tk.Menu.__init__(self, root)
 
         self.root = root
-
+        
+        #All the options under the FILE header
         filemenu = tk.Menu(self, tearoff=False)
         self.add_cascade(label="File",underline=0, menu=filemenu)
         filemenu.add_command(
                              label="New Receipt", 
-                             command= lambda: self.root.appFrame.select(self.root.appFrame.add_Receipt)
+                             command= lambda: self.root.appFrame.select(
+                                                self.root.appFrame.add_Receipt
+                                                )
                              )
         filemenu.add_separator()
-        filemenu.add_command(label="Exit", underline=1, command=self.quit)
+        filemenu.add_command(
+                             label="Exit", 
+                             underline=1, 
+                             command=lambda: exit(0)
+                            )
 
+        #All the options under the HELP header
         helpmenu = tk.Menu(self, tearoff=False)
         self.add_cascade(label="Help", menu=helpmenu)
         helpmenu.add_command(label="About...", command=self.callback)
-
-    def quit(self):
-        sys.exit(0)
     
     def callback(self):
+        """Place holder function"""
         print "called the callback!"
 
 class StatusBar(ttk.Frame):
-
+    """Will eventually contain relevant information for the user"""
     def __init__(self, master):
         ttk.Frame.__init__(self, master)
         self.label = ttk.Label(self, relief='sunken', anchor='w')
@@ -61,6 +69,10 @@ class StatusBar(ttk.Frame):
 
             
 class Application(ttk.Notebook):
+    """
+    A ttk notebook that contains all the functions of the application
+    separated by tabs
+    """
     def __init__(self, root):
         ttk.Notebook.__init__(self, root, width=200, height=200)
         

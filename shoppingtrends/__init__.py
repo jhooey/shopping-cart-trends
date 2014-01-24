@@ -27,9 +27,11 @@ if not db_exists:
 #login.mainloop()
 
 
-session_user = session.query(User)\
-                            .filter_by(username='jhooey')\
-                             .first()
+#temporary, will be used until application is in a more complete state
+session_user = session.query(User).filter_by(username='jhooey').first()
+
+
+#Main Application
 root = Root(session_user, session)
 root.mainloop()
 
