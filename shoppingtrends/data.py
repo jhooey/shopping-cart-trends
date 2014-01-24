@@ -1,4 +1,5 @@
 from localization import Province, Country, Store
+from user import User
 from receipt import Receipt
 
 def populate_all_tables(session):
@@ -26,9 +27,11 @@ def populate_provinces_tbl(session):
                      ]
     session.add(canada)
     
+    
     session.add_all([Store("Loblaws", "Rideau and Nelson", ontario),
                      Store("Maxi", "Hull St. Joseph", quebec),
-                     Store("Herb and Spice Shop", "375 Bank Street", ontario)]
+                     Store("Herb and Spice Shop", "375 Bank Street", ontario),
+                     User("Jacob", "Hooey", "jhooey", "password")]
                     )
 
     session.commit()
