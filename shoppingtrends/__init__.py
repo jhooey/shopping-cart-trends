@@ -10,6 +10,8 @@ import os.path
 from database import db_init
 from data import populate_all_tables
 from authorization import Authorzation
+from application import Root
+from user import User
 
 db_exists = os.path.isfile('test.db')
 
@@ -21,8 +23,15 @@ session = db_init(db)
 if not db_exists:
     populate_all_tables(session)
 
-login = Authorzation(session)
-login.mainloop()
+#login = Authorzation(session)
+#login.mainloop()
+
+
+session_user = session.query(User)\
+                            .filter_by(username='jhooey')\
+                             .first()
+root = Root()
+root.mainloop()
 
 try:
     session_user = login.session_user

@@ -81,6 +81,3 @@ class Application(ttk.Notebook):
 class Dashboard(tk.Canvas):
     def __init__(self):
         pass
-    
-root = Root()
-root.mainloop()
