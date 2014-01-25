@@ -1,3 +1,4 @@
+import os
 import Tkinter as tk
 import tkMessageBox
 import ttk
@@ -11,7 +12,9 @@ class Root(tk.Tk):
         self.session_user = session_user
         self.session = session
         
-        self.iconbitmap(default='./img/shopping_basket.ico')
+        if "nt" == os.name:
+            self.iconbitmap(default='./img/shopping_basket.ico')   
+        
         self.wm_title("Shopping Cart Trends")
         
         self.config(menu=MenuBar(self))
