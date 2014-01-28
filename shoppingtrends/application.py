@@ -1,3 +1,4 @@
+import os
 import Tkinter as tk
 import tkMessageBox
 import ttk
@@ -11,7 +12,9 @@ class Root(tk.Tk):
         self.session_user = session_user
         self.session = session
         
-        self.iconbitmap(default='./img/shopping_basket.ico')
+        if "nt" == os.name:
+            self.iconbitmap(default='./img/shopping_basket.ico')   
+        
         self.wm_title("Shopping Cart Trends")
         
         self.config(menu=MenuBar(self))
@@ -86,9 +89,9 @@ class Application(ttk.Notebook):
     separated by tabs
     """
     def __init__(self, root):
-        ttk.Notebook.__init__(self, root, width=200, height=200)
+        ttk.Notebook.__init__(self, root, width=800, height=600)
         
-        self.dashboard = ttk.Frame(self)
+        self.dashboard = Dashboard(self)
         self.receipts = ttk.Frame(self)
         self.stores = ttk.Frame(self)
         self.categories = ttk.Frame(self)
@@ -101,6 +104,19 @@ class Application(ttk.Notebook):
         self.add(self.categories, text = "Categories")
         self.add(self.add_Receipt, text = "Add Receipt")
 
-class Dashboard(tk.Canvas):
-    def __init__(self):
-        pass
+class Dashboard(ttk.Frame):
+    def __init__(self, root):
+        ttk.Frame.__init__(self, root)
+        self.pack(side='top', fill='both', expand='True')
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
