@@ -120,7 +120,11 @@ class ReceiptsFrame(ttk.Frame):
         list_frame.pack(anchor='nw', side='left', fill='y', expand='True')
         
         scrollbar = tk.Scrollbar(list_frame, orient='vertical')
-        listbox = tk.Listbox(list_frame, width=35, yscrollcommand=scrollbar.set)
+        listbox = tk.Listbox(
+                             list_frame, 
+                             width=35, 
+                             yscrollcommand=scrollbar.set
+                             )
         scrollbar.config(command=listbox.yview)
         scrollbar.pack(side='right', fill='y')
         
