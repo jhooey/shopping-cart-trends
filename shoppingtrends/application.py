@@ -99,8 +99,8 @@ class Application(ttk.Notebook):
         self.add_Receipt = ttk.Frame(self)
         
         
-        self.add(self.dashboard, text = "Dashboard")
         self.add(self.receipts, text = "My Receipts")
+        self.add(self.dashboard, text = "Dashboard")
         self.add(self.stores, text = "Stores")
         self.add(self.categories, text = "Categories")
         self.add(self.add_Receipt, text = "Add Receipt")
