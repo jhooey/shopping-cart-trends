@@ -116,7 +116,13 @@ class ReceiptsFrame(ttk.Frame):
         ttk.Frame.__init__(self, notebook)
         self.pack(side='top', fill='both', expand='True')
                 
-        
+        listbox = tk.Listbox(self)
+        listbox.pack()
+            
+        listbox.insert('end', "a list entry")
+            
+        for item in ["one", "two", "three", "four"]:
+            listbox.insert('end', item)
         
         
         
