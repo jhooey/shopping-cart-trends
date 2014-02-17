@@ -91,8 +91,9 @@ class Application(ttk.Notebook):
     def __init__(self, root):
         ttk.Notebook.__init__(self, root, width=800, height=600)
         
+        
         self.dashboard = Dashboard(self)
-        self.receipts = ttk.Frame(self)
+        self.receipts = ReceiptsFrame(self, root)
         self.stores = ttk.Frame(self)
         self.categories = ttk.Frame(self)
         self.add_Receipt = ttk.Frame(self)
@@ -105,12 +106,16 @@ class Application(ttk.Notebook):
         self.add(self.add_Receipt, text = "Add Receipt")
 
 class Dashboard(ttk.Frame):
-    def __init__(self, root):
-        ttk.Frame.__init__(self, root)
+    def __init__(self, notebook):
+        ttk.Frame.__init__(self, notebook)
         self.pack(side='top', fill='both', expand='True')
         
         
-        
+class ReceiptsFrame(ttk.Frame):
+    def __init__(self, notebook, root):
+        ttk.Frame.__init__(self, notebook)
+        self.pack(side='top', fill='both', expand='True')
+                
         
         
         
