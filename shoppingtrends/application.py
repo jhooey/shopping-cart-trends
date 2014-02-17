@@ -116,11 +116,15 @@ class ReceiptsFrame(ttk.Frame):
         ttk.Frame.__init__(self, notebook)
         self.pack(side='top', fill='both', expand='True')
         
-        list_frame = tk.Frame(self, width=200, bg='red')
+        list_frame = tk.Frame(self, width=180, bg='red', padx=10, pady=10)
         list_frame.pack(anchor='nw', side='left', fill='y', expand='True')
         
-        listbox = tk.Listbox(list_frame, width=35)
-        listbox.pack(fill='both', expand='True', padx=10, pady=10)
+        scrollbar = tk.Scrollbar(list_frame, orient='vertical')
+        listbox = tk.Listbox(list_frame, width=35, yscrollcommand=scrollbar.set)
+        scrollbar.config(command=listbox.yview)
+        scrollbar.pack(side='right', fill='y')
+        
+        listbox.pack(fill='both', expand='True')
             
         listbox.insert('end', "a list entry")
             
