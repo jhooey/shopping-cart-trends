@@ -119,6 +119,9 @@ class ReceiptsFrame(ttk.Frame):
         list_frame = tk.Frame(self, width=180, bg='red', padx=10, pady=10)
         list_frame.pack(anchor='nw', side='left', fill='y', expand='True')
         
+        receipt_frame = tk.Frame(self, width=580, bg='blue', padx=10, pady=10)
+        receipt_frame.pack(anchor='ne', side='right', fill='both', expand='True')
+        
         scrollbar = tk.Scrollbar(list_frame, orient='vertical')
         listbox = tk.Listbox(
                              list_frame, 
