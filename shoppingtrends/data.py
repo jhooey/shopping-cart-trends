@@ -1,6 +1,6 @@
 from localization import Province, Country, Store
 from user import User
-from receipt import Receipt, Item
+from receipt import Receipt, Item, Category
 import datetime
 
 def populate_all_tables(session):
@@ -28,18 +28,26 @@ def populate_provinces_tbl(session):
                      ]
     session.add(canada)
     
+    
+    #Create test user
     jhooey = User("Jacob", "Hooey", "jhooey", "password")
     
+    #Create test Stores
     loblaws = Store("Loblaws", "Rideau and Nelson", ontario)
     Maxi = Store("Maxi", "Hull St. Joseph", quebec)
+    herbspice = Store("Herb and Spice Shop", "375 Bank Street", ontario)
     
+    
+    #Create test Receipts
     loblaws_receipt1 = Receipt(loblaws)
     loblaws_receipt2 = Receipt(loblaws, datetime.date.fromordinal(datetime.date.today().toordinal()-1))
     loblaws_receipt3 = Receipt(loblaws, datetime.date.fromordinal(datetime.date.today().toordinal()-4))
     
+    #Create Test Items
     bananas = Item('Bananas', 'yellow fruit', False)
     napkins = Item('Napkins', 'paper napkins', True)
     
+    #Add Receipts to test user
     jhooey.add_receipt(loblaws_receipt1)
     jhooey.add_receipt(loblaws_receipt2)
     jhooey.add_receipt(loblaws_receipt3)
@@ -48,10 +56,12 @@ def populate_provinces_tbl(session):
     session.add_all([
                      loblaws,
                      Maxi,
-                     Store("Herb and Spice Shop", "375 Bank Street", ontario),
+                     herbspice,
                      jhooey,
                      bananas,
-                     napkins
+                     napkins,
+                     Category('Food', 'Stuff you eat'),
+                     Category('Household Supplies', "Stuff you don't eat")
                     ],
                    )
 
