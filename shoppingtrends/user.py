@@ -35,7 +35,7 @@ class User(Base):
         """
         Adds a receipt object to the user
         """
-        self.items.append(receipt)
+        self.receipts.append(receipt)
     
     def check_pwd(self, pwd):
         """Compares the given password with the one stored in the db"""
