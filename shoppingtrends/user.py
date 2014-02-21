@@ -2,7 +2,6 @@
 This module managers everything regarding the person using the app
 
 """
-
 from sqlalchemy import Column, Integer, String, Sequence
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship, backref

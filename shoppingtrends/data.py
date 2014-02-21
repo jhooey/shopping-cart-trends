@@ -65,8 +65,5 @@ def populate_provinces_tbl(session):
                     ],
                    )
 
-
-
-
     session.commit()
 
