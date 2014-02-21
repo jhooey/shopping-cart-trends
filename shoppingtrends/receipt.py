@@ -101,7 +101,7 @@ class Item(Base):
     def __init__(self, name, description, taxed=True):
         self.name = name
         self.description = description
-        self.taxed = True
+        self.taxed = taxed
 
 
         
