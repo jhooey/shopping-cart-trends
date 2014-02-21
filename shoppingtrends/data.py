@@ -28,6 +28,8 @@ def populate_provinces_tbl(session):
                      ]
     session.add(canada)
     
+    jhooey = User("Jacob", "Hooey", "jhooey", "password")
+    
     loblaws = Store("Loblaws", "Rideau and Nelson", ontario)
     Maxi = Store("Maxi", "Hull St. Joseph", quebec)
     
@@ -38,16 +40,20 @@ def populate_provinces_tbl(session):
     bananas = Item('Bananas', 'yellow fruit', False)
     napkins = Item('Napkins', 'paper napkins', True)
     
-    session.add_all([loblaws,
+    jhooey.add_receipt(loblaws_receipt1)
+    jhooey.add_receipt(loblaws_receipt2)
+    jhooey.add_receipt(loblaws_receipt3)
+    
+    
+    session.add_all([
+                     loblaws,
                      Maxi,
                      Store("Herb and Spice Shop", "375 Bank Street", ontario),
-                     User("Jacob", "Hooey", "jhooey", "password"),
-                    loblaws_receipt1,
-                    loblaws_receipt2,
-                    loblaws_receipt3,
-                    bananas,
-                    napkins],
-                    )
+                     jhooey,
+                     bananas,
+                     napkins
+                    ],
+                   )
 
 
 
