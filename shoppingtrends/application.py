@@ -3,6 +3,8 @@ import Tkinter as tk
 import tkMessageBox
 import ttk
 
+from receipt import Receipt
+
 class Root(tk.Tk):
     """Container for all frames within the application"""
     
@@ -133,22 +135,8 @@ class ReceiptsFrame(ttk.Frame):
         
         listbox.pack(fill='both', expand='True')
             
-        listbox.insert('end', "a list entry")
-            
-        for item in ["one", "two", "three", "four","one", "two", "three", 
-                     "four","one", "two", "three", "four","one", "two", 
-                     "three", "four","one", "two", "three", "four","one", 
-                     "two", "three", "four", "one", "two", "three", "four",
-                     "one", "two", "three", "four","one", "two", "three", 
-                     "four","one", "two", "three", "four","one", "two", 
-                     "three", "four","one", "two", "three", "four", "one", 
-                     "two", "three", "four","one", "two", "three", "four",
-                     "one", "two", "three", "four","one", "two", "three", 
-                     "four","one", "two", "three", "four","one", "two", 
-                     "three", "four"]:
-            listbox.insert('end', item)
-        
-        
+        for receipt in root.session.query(Receipt).order_by(Receipt.purchase_date):
+            listbox.insert('end', receipt)
         
         
         
