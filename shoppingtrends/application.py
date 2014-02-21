@@ -136,7 +136,8 @@ class ReceiptsFrame(ttk.Frame):
         listbox.pack(fill='both', expand='True')
             
         for receipt in root.session.query(Receipt).order_by(Receipt.purchase_date):
-            listbox.insert('end', receipt)
+            listbox.insert('end', ''.join([receipt.store.name, '    ', 
+                                            str(receipt.purchase_date)]))
         
         
         
