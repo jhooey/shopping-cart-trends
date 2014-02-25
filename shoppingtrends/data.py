@@ -47,6 +47,15 @@ def populate_provinces_tbl(session):
     bananas = Item('Bananas', 'yellow fruit', False)
     napkins = Item('Napkins', 'paper napkins', True)
     
+    #Add items to receipts
+    loblaws_receipt1.add_item(session, bananas, 2, 0.79)
+    loblaws_receipt1.add_item(session, napkins, 1, 2.99)
+    
+    loblaws_receipt2.add_item(session, bananas, 1.54, 0.79)
+    
+    loblaws_receipt3.add_item(session, bananas, 10.2, 0.59)
+    loblaws_receipt3.add_item(session, napkins, 3, 1.99)
+    
     #Add Receipts to test user
     jhooey.add_receipt(loblaws_receipt1)
     jhooey.add_receipt(loblaws_receipt2)
