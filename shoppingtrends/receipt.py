@@ -63,9 +63,9 @@ class Receipt(Base):
             total += item.total_cost(self.tax)
         return total
     
-    def add_item(self, session, item):
+    def add_item(self, session, item, price, quantity):
         """Appends and commits the change to the db"""
-        self.items.append(item)
+        self.items.append(ReceiptItem(item, price, quantity))
         session.commit()
 
     def remove_item(self, session, item):
