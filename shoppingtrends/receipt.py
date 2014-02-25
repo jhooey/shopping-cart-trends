@@ -40,18 +40,11 @@ class Receipt(Base):
         self.tax = store.province.taxes
     
     def __str__(self):
-        """Creates a string that resembles a receipt form a store"""
-        str_out = 'Receipt: \n'
-        str_out += ' '.join([self.store.name, '    ', 
-                             str(self.purchase_date), '\n' ])
-        
-        for item in self.items:
-            str_out += ' '.join(['\n', str(item), '    ', 
-                            str(round(item.total_cost(self.tax),2))])
-            
-        str_out += ' '.join(['\n\nTaxes:', str(self.tax), 
-                             '    Total =', str(round(self.total(),2))])
-        return str_out
+        return ' '.join([self.store.name, '    ', 
+                             str(self.purchase_date), 
+                             '     ',
+                             str(round(self.total(),2))
+                             ])
         
     
     def total(self):
