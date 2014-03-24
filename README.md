@@ -26,10 +26,6 @@ Status
 The Software is currently under development. It is in a very unstable state so
  there may be commits that break the application.
  
- 
-The main program is run from the trends.py file.
- 
- 
 Currently the only gui component that exists is for the Authorization methods.
  That is where the user can login and register for the application. 
 
